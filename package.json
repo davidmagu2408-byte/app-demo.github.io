@@ -13,6 +13,7 @@
     "axios": "^1.13.5",
     "bootstrap": "^5.3.8",
     "express": "^5.2.1",
+    "gh-pages": "^6.3.0",
     "react": "^19.2.4",
     "react-icons": "^5.5.0",
     "react-inner-image-zoom": "^4.0.1",
@@ -27,11 +28,14 @@
     "@eslint/js": "^9.36.0",
     "@vitejs/plugin-react": "^5.0.4"
   },
+  "homepage": "https://davidmagu2408-byte.github.io/app-demo.github.io/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
