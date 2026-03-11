@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/app-demo.github.io/static/css/main.85bfa539.css",
+    "main.js": "/app-demo.github.io/static/js/main.23c08b9e.js",
+    "static/media/newsletter.png": "/app-demo.github.io/static/media/newsletter.5931358dd220a40019fc.png",
+    "index.html": "/app-demo.github.io/index.html",
+    "main.85bfa539.css.map": "/app-demo.github.io/static/css/main.85bfa539.css.map",
+    "main.23c08b9e.js.map": "/app-demo.github.io/static/js/main.23c08b9e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.85bfa539.css",
+    "static/js/main.23c08b9e.js"
+  ]
+}
