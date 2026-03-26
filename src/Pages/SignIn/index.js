@@ -53,7 +53,7 @@ const SignIn = () => {
                 className="w-100"
               />
             </div>
-            <a className="border-effect cursor" href="#">
+            <a className="border-effect cursor" href="/#">
               Forgot Password?
             </a>
             <div className="d-flex align-items-center mt-3 mb-3">

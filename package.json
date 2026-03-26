@@ -19,23 +19,20 @@
     "react-inner-image-zoom": "^4.0.1",
     "react-range-slider-input": "^3.3.2",
     "react-router-dom": "^7.13.1",
-    "react-scripts": "^5.0.1",
     "react-slick": "^0.31.0",
     "swiper": "^12.1.2",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
-    "@vitejs/plugin-react": "^5.0.4"
+    "@vitejs/plugin-react": "^5.2.0",
+    "vite": "^8.0.3"
   },
   "homepage": "https://davidmagu2408-byte.github.io/app-demo.github.io/",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": [
