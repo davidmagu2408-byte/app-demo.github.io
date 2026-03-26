@@ -5,8 +5,9 @@ export default defineConfig({
     plugins: [react()],
     server: {
         proxy: {
-            target: "https://client-demo-ecommerce.vercel.app",
-            changeOrigin: true
+            //target: "http://localhost:3000",
+            //"https://client-demo-ecommerce.vercel.app"
+            //changeOrigin: true
         },
     }
 })

@@ -28,11 +28,10 @@
     "@vitejs/plugin-react": "^5.2.0",
     "vite": "^8.0.3"
   },
-  "homepage": "https://davidmagu2408-byte.github.io/app-demo.github.io/",
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "extends": [
