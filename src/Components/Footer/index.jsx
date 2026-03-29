@@ -6,7 +6,7 @@ import { FaFacebookF } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa";
 import { IoMailOutline } from "react-icons/io5";
-import LogoLetter from "../../assests/images/newsletter.png";
+import LogoLetter from "../../assets/images/newsletter.png";
 import Button from "@mui/material/Button";
 
 const Footer = () => {
@@ -19,8 +19,8 @@ const Footer = () => {
               <p className="text-white mb-1">
                 $20 discount for your first order
               </p>
-              <h3 class="text-white">Join our newsletter and get...</h3>
-              <p class="text-light">
+              <h3 className="text-white">Join our newsletter and get...</h3>
+              <p className="text-light">
                 Join our email subscription now to get updates on
                 <br /> promotions and coupons.
               </p>
@@ -38,35 +38,35 @@ const Footer = () => {
       </section>
       <footer>
         <div className="container"></div>
-        <div class="container">
-          <div class="topInfo row">
-            <div class="col d-flex align-items-center">
+        <div className="container">
+          <div className="topInfo row">
+            <div className="col d-flex align-items-center">
               <span>
                 <LuShirt />
               </span>
-              <span class="ms-2">Everyday fresh products</span>
+              <span className="ms-2">Everyday fresh products</span>
             </div>
-            <div class="col d-flex align-items-center">
+            <div className="col d-flex align-items-center">
               <span>
                 <TbTruckDelivery />
               </span>
-              <span class="ms-2">Free delivery for order over $70</span>
+              <span className="ms-2">Free delivery for order over $70</span>
             </div>
-            <div class="col d-flex align-items-center">
+            <div className="col d-flex align-items-center">
               <span>
                 <PiSealPercentBold />
               </span>
-              <span class="ms-2">Daily Mega Discounts</span>
+              <span className="ms-2">Daily Mega Discounts</span>
             </div>
-            <div class="col d-flex align-items-center">
+            <div className="col d-flex align-items-center">
               <span>
                 <CiBadgeDollar />
               </span>
-              <span class="ms-2">Best price on the market</span>
+              <span className="ms-2">Best price on the market</span>
             </div>
           </div>
-          <div class="row mt-5 linksWrap">
-            <div class="col">
+          <div className="row mt-5 linksWrap">
+            <div className="col">
               <h5>FRUIT &amp; VEGETABLES</h5>
               <ul>
                 <li>
@@ -92,7 +92,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div class="col">
+            <div className="col">
               <h5>BREAKFAST &amp; DAIRY</h5>
               <ul>
                 <li>
@@ -118,7 +118,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div class="col">
+            <div className="col">
               <h5>MEAT &amp; SEAFOOD</h5>
               <ul>
                 <li>
@@ -144,7 +144,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div class="col">
+            <div className="col">
               <h5>BEVERAGES</h5>
               <ul>
                 <li>
@@ -170,7 +170,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div class="col">
+            <div className="col">
               <h5>BREADS &amp; BAKERY</h5>
               <ul>
                 <li>
@@ -197,20 +197,20 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div class="copyright mt-3 pt-3 pb-3 d-flex">
-            <p class="mb-0">david</p>
-            <ul class="list list-inline ms-auto mb-0 socials">
-              <li class="list-inline-item">
+          <div className="copyright mt-3 pt-3 pb-3 d-flex">
+            <p className="mb-0">david</p>
+            <ul className="list list-inline ms-auto mb-0 socials">
+              <li className="list-inline-item">
                 <a href="/">
                   <FaFacebookF />
                 </a>
               </li>
-              <li class="list-inline-item">
+              <li className="list-inline-item">
                 <a href="/">
                   <FaXTwitter />
                 </a>
               </li>
-              <li class="list-inline-item">
+              <li className="list-inline-item">
                 <a href="/">
                   <FaInstagram />
                 </a>

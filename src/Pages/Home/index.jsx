@@ -4,11 +4,19 @@ import Button from "@mui/material/Button";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
+import { Navigation, Virtual } from "swiper/modules";
 import ProductItem from "../../Components/ProductItem";
 import HomeCate from "../../Components/HomeCate";
+import { useEffect, useState } from "react";
+import { fetchDataFromAPI } from "../../apis/api";
 
 const Home = () => {
+  const [productData, setProductData] = useState([]);
+  const [userProfile, setUserProfile] = useState([]);
+  const month = new Date().getMonth() + 1;
+  useEffect(() => {
+    fetchDataFromAPI("/product/featured").then((data) => setProductData(data));
+  }, []);
   return (
     <>
       <HomeBanner />
@@ -35,9 +43,9 @@ const Home = () => {
             <div className="col-md-9 productRow">
               <div className="d-flex align-items-center">
                 <div className="info w-75">
-                  <h3 className="mb-0 hd">Best sellers</h3>
+                  <h3 className="mb-0 hd">Sản phẩm nổi bật</h3>
                   <p className="text-light text-sml mb-0">
-                    Do not miss the current offers untill the end of March
+                    Đừng bỏ lỡ các ưu đãi hiện tại đến hết tháng {month}
                   </p>
                 </div>
                 <Button className="viewAllBtn ms-auto">
@@ -51,24 +59,19 @@ const Home = () => {
                   spaceBetween={10}
                   navigation={true}
                   slidesPerGroup={3}
-                  modules={[Navigation]}
+                  modules={[Navigation, Virtual]}
                   className="mySwiper"
+                  virtual
                 >
-                  <SwiperSlide>
-                    <ProductItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <ProductItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <ProductItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <ProductItem />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <ProductItem />
-                  </SwiperSlide>
+                  {productData.product &&
+                    productData.product.length > 0 &&
+                    productData.product.map((item) => {
+                      return (
+                        <SwiperSlide key={item.id}>
+                          <ProductItem item={item} />
+                        </SwiperSlide>
+                      );
+                    })}
                 </Swiper>
               </div>
               <div className="d-flex align-items-center">
@@ -98,11 +101,11 @@ const Home = () => {
                 <ProductItem />
               </div>
 
-              <div className="row">
+              {/* <div className="row">
                 <div className="banner mt-4">
                   <img src="" alt="" className="cursor w-100" />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

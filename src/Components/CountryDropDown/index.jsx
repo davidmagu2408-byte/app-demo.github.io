@@ -42,11 +42,11 @@ const CountryDropDown = () => {
       <div>
         <Button className="countryDrop" onClick={() => setopenModel(true)}>
           <div className="info d-flex flex-column">
-            <span className="label">Your location</span>
+            <span className="label">Chọn vị trí nơi ở</span>
             <span className="location">
-              {context.selectedCountry && context.selectedCountry.length > 10
-                ? context.selectedCountry.substr(0, 10) + "..."
-                : context.selectedCountry || "Select location"}
+              {context.selectedCountry && context.selectedCountry.length > 20
+                ? context.selectedCountry.substr(0, 20) + "..."
+                : context.selectedCountry || "Chọn vị trí"}
             </span>
           </div>
           <span className="ml-auto">
@@ -75,15 +75,16 @@ const CountryDropDown = () => {
             </Button>
           </div>
           <ul className="countryList mt-3">
-            {countryList.lenght !== 0 &&
+            {countryList &&
+              countryList.lenght !== 0 &&
               countryList?.map((item, index) => {
                 return (
                   <li key={index}>
                     <Button
-                      onClick={() => setselectCountry(index, item.country)}
+                      onClick={() => setselectCountry(index, item.name)}
                       className={`${selectTab === index ? "active" : ""}`}
                     >
-                      {item.country}
+                      {item.name}
                     </Button>
                   </li>
                 );

@@ -1,16 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css");
+
 * {
   margin: 0px;
   padding: 0px;
 }
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css");
 
 body {
   font-family: "Lato", sans-serif;
 }
 
 @media (min-width: 1300px) {
+
   .container,
   .container-lg,
   .container-md,
@@ -24,9 +26,11 @@ body {
   width: 8px !important;
   height: 8px !important;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #ccc;
 }
+
 ::-webkit-scrollbar-track {
   background: #0000 !important;
 }
@@ -35,9 +39,11 @@ body {
 .cursor {
   cursor: pointer;
 }
+
 .text-light {
   color: #ccc !important;
 }
+
 .text-sml {
   font-size: 14px;
 }
@@ -52,21 +58,26 @@ body {
   top: 10px;
   width: 40px !important;
 }
+
 .close_,
 .close_ svg {
   color: #000 !important;
 }
+
 .close_ svg {
   font-size: 22px;
   opacity: 0.7;
 }
+
 .btn-blue,
 button {
   text-transform: capitalize !important;
 }
+
 .bg-blue {
   background: #6d4aae;
 }
+
 .btn-blue {
   background: #6d4aae !important;
   color: #fff !important;
@@ -139,9 +150,11 @@ button {
   background: #e5f8ed;
   color: #00b853;
 }
+
 .section {
   padding: 45px 0;
 }
+
 .reviewBox {
   border-bottom: 1px solid #0003 !important;
 }
@@ -163,7 +176,7 @@ button {
   vertical-align: bottom;
 }
 
-.table tbody + tbody {
+.table tbody+tbody {
   border-top: 2px solid #dee2e6;
 }
 
@@ -183,7 +196,7 @@ button {
   border-bottom-width: 2px;
 }
 
-.table-borderless tbody + tbody,
+.table-borderless tbody+tbody,
 .table-borderless td,
 .table-borderless th,
 .table-borderless thead th {
@@ -200,12 +213,12 @@ button {
 }
 
 .table-primary,
-.table-primary > td,
-.table-primary > th {
+.table-primary>td,
+.table-primary>th {
   background-color: #b8daff;
 }
 
-.table-primary tbody + tbody,
+.table-primary tbody+tbody,
 .table-primary td,
 .table-primary th,
 .table-primary thead th {
@@ -213,18 +226,18 @@ button {
 }
 
 .table-hover .table-primary:hover,
-.table-hover .table-primary:hover > td,
-.table-hover .table-primary:hover > th {
+.table-hover .table-primary:hover>td,
+.table-hover .table-primary:hover>th {
   background-color: #9fcdff;
 }
 
 .table-secondary,
-.table-secondary > td,
-.table-secondary > th {
+.table-secondary>td,
+.table-secondary>th {
   background-color: #d6d8db;
 }
 
-.table-secondary tbody + tbody,
+.table-secondary tbody+tbody,
 .table-secondary td,
 .table-secondary th,
 .table-secondary thead th {
@@ -232,18 +245,18 @@ button {
 }
 
 .table-hover .table-secondary:hover,
-.table-hover .table-secondary:hover > td,
-.table-hover .table-secondary:hover > th {
+.table-hover .table-secondary:hover>td,
+.table-hover .table-secondary:hover>th {
   background-color: #c8cbcf;
 }
 
 .table-success,
-.table-success > td,
-.table-success > th {
+.table-success>td,
+.table-success>th {
   background-color: #c3e6cb;
 }
 
-.table-success tbody + tbody,
+.table-success tbody+tbody,
 .table-success td,
 .table-success th,
 .table-success thead th {
@@ -251,18 +264,18 @@ button {
 }
 
 .table-hover .table-success:hover,
-.table-hover .table-success:hover > td,
-.table-hover .table-success:hover > th {
+.table-hover .table-success:hover>td,
+.table-hover .table-success:hover>th {
   background-color: #b1dfbb;
 }
 
 .table-info,
-.table-info > td,
-.table-info > th {
+.table-info>td,
+.table-info>th {
   background-color: #bee5eb;
 }
 
-.table-info tbody + tbody,
+.table-info tbody+tbody,
 .table-info td,
 .table-info th,
 .table-info thead th {
@@ -270,18 +283,18 @@ button {
 }
 
 .table-hover .table-info:hover,
-.table-hover .table-info:hover > td,
-.table-hover .table-info:hover > th {
+.table-hover .table-info:hover>td,
+.table-hover .table-info:hover>th {
   background-color: #abdde5;
 }
 
 .table-warning,
-.table-warning > td,
-.table-warning > th {
+.table-warning>td,
+.table-warning>th {
   background-color: #ffeeba;
 }
 
-.table-warning tbody + tbody,
+.table-warning tbody+tbody,
 .table-warning td,
 .table-warning th,
 .table-warning thead th {
@@ -289,18 +302,18 @@ button {
 }
 
 .table-hover .table-warning:hover,
-.table-hover .table-warning:hover > td,
-.table-hover .table-warning:hover > th {
+.table-hover .table-warning:hover>td,
+.table-hover .table-warning:hover>th {
   background-color: #ffe8a1;
 }
 
 .table-danger,
-.table-danger > td,
-.table-danger > th {
+.table-danger>td,
+.table-danger>th {
   background-color: #f5c6cb;
 }
 
-.table-danger tbody + tbody,
+.table-danger tbody+tbody,
 .table-danger td,
 .table-danger th,
 .table-danger thead th {
@@ -308,18 +321,18 @@ button {
 }
 
 .table-hover .table-danger:hover,
-.table-hover .table-danger:hover > td,
-.table-hover .table-danger:hover > th {
+.table-hover .table-danger:hover>td,
+.table-hover .table-danger:hover>th {
   background-color: #f1b0b7;
 }
 
 .table-light,
-.table-light > td,
-.table-light > th {
+.table-light>td,
+.table-light>th {
   background-color: #fdfdfe;
 }
 
-.table-light tbody + tbody,
+.table-light tbody+tbody,
 .table-light td,
 .table-light th,
 .table-light thead th {
@@ -327,18 +340,18 @@ button {
 }
 
 .table-hover .table-light:hover,
-.table-hover .table-light:hover > td,
-.table-hover .table-light:hover > th {
+.table-hover .table-light:hover>td,
+.table-hover .table-light:hover>th {
   background-color: #ececf6;
 }
 
 .table-dark,
-.table-dark > td,
-.table-dark > th {
+.table-dark>td,
+.table-dark>th {
   background-color: #c6c8ca;
 }
 
-.table-dark tbody + tbody,
+.table-dark tbody+tbody,
 .table-dark td,
 .table-dark th,
 .table-dark thead th {
@@ -346,17 +359,17 @@ button {
 }
 
 .table-hover .table-dark:hover,
-.table-hover .table-dark:hover > td,
-.table-hover .table-dark:hover > th {
+.table-hover .table-dark:hover>td,
+.table-hover .table-dark:hover>th {
   background-color: #b9bbbe;
 }
 
 .table-active,
-.table-active > td,
-.table-active > th,
+.table-active>td,
+.table-active>th,
 .table-hover .table-active:hover,
-.table-hover .table-active:hover > td,
-.table-hover .table-active:hover > th {
+.table-hover .table-active:hover>td,
+.table-hover .table-active:hover>th {
   background-color: rgba(0, 0, 0, 0.075);
 }
 
@@ -401,25 +414,30 @@ button {
   background: #fff;
   border-bottom: 1px solid #0000001a;
 }
+
 .headerWrapper .top-strip {
   padding: 8px 0px;
 }
+
 .headerWrapper .top-strip p {
   color: #fff;
   font-size: 14px;
   font-weight: 400;
 }
+
 .headerWrapper .header {
   width: 100%;
   height: auto;
   padding: 15px 0px 25px 0px;
 }
+
 .logoWrapper img {
   width: 70%;
   margin-left: 10%;
 }
+
 .headerWrapper .header .part2 .countryDrop {
-  width: 150px;
+  width: 200px;
   height: 50px;
   min-width: 150px;
   color: #000 !important;
@@ -427,13 +445,16 @@ button {
   border-radius: 7px !important;
   padding: 10px 10px !important;
 }
+
 .headerWrapper .header .part2 .countryDrop .info {
   width: 90%;
 }
+
 .headerWrapper .header .part2 .countryDrop {
   text-align: left;
   justify-content: flex-start !important;
 }
+
 .headerWrapper .header .part2 .countryDrop .label {
   font-size: 12px !important;
   text-transform: capitalize !important;
@@ -441,6 +462,7 @@ button {
   line-height: 16px;
   padding: 1px 0px 1px 2px;
 }
+
 .headerWrapper .header .part2 .countryDrop .location {
   font-size: 14px !important;
   text-transform: capitalize !important;
@@ -449,6 +471,7 @@ button {
   line-height: 16px;
   padding: 1px 0px 1px 2px;
 }
+
 .headerWrapper .header .part2 .countryDrop span.ml-auto svg {
   opacity: 0.7;
 }
@@ -461,6 +484,7 @@ button {
   position: relative;
   border-radius: 10px;
 }
+
 .headerSearch input {
   background: transparent !important;
   outline: none !important;
@@ -471,6 +495,7 @@ button {
   border: 0px !important;
   padding: 0px 20px !important;
 }
+
 .headerSearch button {
   position: absolute;
   top: 5px;
@@ -482,10 +507,12 @@ button {
   border-radius: 50% !important;
   color: #000;
 }
+
 .headerSearch button svg {
   font-size: 22px;
   opacity: 0.8;
 }
+
 .headerSearch input::-webkit-input-placeholder {
   color: rgba(0, 0, 0, 0.4);
 }
@@ -493,6 +520,7 @@ button {
 header .part3 {
   padding: 0px 10px;
 }
+
 header .part3 .circle {
   align-items: center;
   justify-content: center;
@@ -503,6 +531,7 @@ header .part3 .circle {
   border: 1px solid rgba(0, 0, 0, 0.1) !important;
   color: #000;
 }
+
 header .part3 .circle svg {
   font-size: 22px;
 }
@@ -513,12 +542,15 @@ header .part3 .circle svg {
   font-weight: 600;
   padding: 0px 10px;
 }
+
 .cartTab button {
   background: #fff1ee !important;
 }
+
 .cartTab button svg {
   color: #ea2b0f !important;
 }
+
 .cartTab .count {
   position: absolute;
   top: -6px;
@@ -534,16 +566,19 @@ header .part3 .circle svg {
   padding: 25px;
   position: relative;
 }
+
 .locationModel .countryList {
   margin-bottom: 0px;
   max-height: 400px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
 .locationModel .countryList li {
   width: 100%;
   list-style: none;
 }
+
 .locationModel .countryList li button {
   width: 100%;
   text-transform: capitalize !important;
@@ -551,9 +586,11 @@ header .part3 .circle svg {
   justify-content: flex-start !important;
   padding: 10px 15px !important;
 }
+
 .locationModel .countryList li button:hover {
   background: #f1f1f1;
 }
+
 .locationModel .countryList li button:active {
   background: #d1cece;
 }
@@ -563,10 +600,12 @@ nav .navPart1 {
   max-width: 20%;
   flex: 0 0 20%;
 }
+
 nav .navPart1 .catWrapper {
   position: relative;
   z-index: 100;
 }
+
 nav .navPart1 .catWrapper .sidebarNav {
   width: 100%;
   height: auto;
@@ -578,26 +617,31 @@ nav .navPart1 .catWrapper .sidebarNav {
   transition: all 0.2s;
   visibility: hidden;
 }
+
 nav .navPart1 .catWrapper .open {
   height: auto;
   opacity: 1;
   visibility: inherit;
 }
+
 nav .navPart1 .catWrapper .sidebarNav ul li {
   width: 100%;
   list-style: none;
   padding: 5px 0px;
 }
+
 nav .navPart1 .catWrapper .sidebarNav ul li button {
   color: #000;
   width: 100%;
   justify-content: flex-start;
   text-transform: capitalize !important;
 }
+
 nav .navPart1 .catWrapper .sidebarNav ul li button svg {
   font-size: 12px;
   opacity: 0.6;
 }
+
 nav .navPart1 .catWrapper .sidebarNav ul li button:hover {
   background: transparent !important;
 }
@@ -605,6 +649,7 @@ nav .navPart1 .catWrapper .sidebarNav ul li button:hover {
 nav .navPart1 .catWrapper .sidebarNav ul li {
   position: static;
 }
+
 nav .navPart1 .catWrapper .sidebarNav ul li .submenu {
   position: absolute;
   top: 0px;
@@ -618,12 +663,14 @@ nav .navPart1 .catWrapper .sidebarNav ul li .submenu {
   transition: all 0.2s ease-in-out;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 nav .navPart1 .catWrapper .sidebarNav ul li:hover .submenu {
   opacity: 1;
   visibility: inherit;
   left: 101%;
   padding: 0px;
 }
+
 nav .navPart1 .catWrapper .sidebarNav ul li:hover .submenu button {
   border-radius: 0px !important;
 }
@@ -638,21 +685,26 @@ nav .AllCateTab {
   padding: 8px 20px !important;
   border-radius: 30px !important;
 }
+
 nav .AllCateTab * {
   color: #fff;
 }
+
 nav .AllCateTab:hover {
   background: #74c7e7;
 }
+
 nav .AllCateTab .text {
   font-weight: 600;
   font-size: 11px;
   margin-top: 4px;
 }
+
 nav .AllCateTab .icon1 svg {
   font-size: 22px !important;
   padding-right: 10px;
 }
+
 nav .AllCateTab .icon2 svg {
   font-size: 18px !important;
   padding-left: 10px;
@@ -661,9 +713,11 @@ nav .AllCateTab .icon2 svg {
 nav .navPart2 ul {
   margin-bottom: 0px;
 }
+
 nav .navPart2 ul li a {
   text-decoration: none;
 }
+
 nav .navPart2 ul li a button {
   font-size: 14px !important;
   font-weight: 600;
@@ -676,9 +730,11 @@ nav .navPart2 ul li a button {
   transition: all 0.2s ease-in-out;
   border-radius: 25px;
 }
+
 nav .navPart2 ul li a svg {
   font-size: 20px;
 }
+
 nav .navPart2 ul li button:hover {
   background: #f0faff;
   color: #1d84b8;
@@ -687,6 +743,7 @@ nav .navPart2 ul li button:hover {
 nav .navPart2 ul li {
   position: relative;
 }
+
 nav .navPart2 ul li .submenu {
   position: absolute;
   top: 150%;
@@ -698,10 +755,12 @@ nav .navPart2 ul li .submenu {
   transition: all 0.2s ease-in-out;
   z-index: 100;
 }
+
 nav .navPart2 ul li .submenu a {
   display: block;
   width: 100%;
 }
+
 nav .navPart2 ul li .submenu a button {
   width: 100%;
   justify-content: flex-start !important;
@@ -709,6 +768,7 @@ nav .navPart2 ul li .submenu a button {
   text-transform: capitalize !important;
   font-weight: 600 !important;
 }
+
 nav .navPart2 ul li:hover .submenu {
   opacity: 1;
   visibility: inherit;
@@ -721,7 +781,8 @@ nav .navPart2 ul li:hover .submenu {
 }
 
 .homeBannerSection .swiper {
-  overflow: inherit !important;
+  overflow: hidden !important;
+  border-radius: 10px !important;
 }
 
 .homeBannerSection .swiper .item {
@@ -729,6 +790,25 @@ nav .navPart2 ul li:hover .submenu {
   overflow: hidden;
   max-height: 400px;
   justify-items: center;
+}
+
+.homeBannerSection .swiper .swiper-pagination-bullet-active {
+  background: #000;
+  /* Màu đen */
+  width: 12px;
+  border-radius: 5px;
+  /* Làm cho chấm đang chọn dài ra một chút cho đẹp */
+}
+
+/* Đổi màu các chấm chưa chọn */
+.homeBannerSection .swiper .swiper-pagination-bullet {
+  background: #ccc;
+  opacity: 1;
+}
+
+/* Đưa các chấm lên cao một chút nếu nó bị đè lên ảnh */
+.homeBannerSection .swiper .swiper-pagination {
+  bottom: 20px !important;
 }
 
 .homeBannerSection * {
@@ -743,6 +823,7 @@ nav .navPart2 ul li:hover .submenu {
   padding: 25px 0px;
   width: 100%;
 }
+
 .homeProducts .banner {
   width: 100%;
   border-radius: 7px;
@@ -753,6 +834,7 @@ nav .navPart2 ul li:hover .submenu {
   font-size: 25px;
   font-weight: 600;
 }
+
 .viewAllBtn {
   padding: 5px 15px !important;
   background: #fff;
@@ -762,6 +844,7 @@ nav .navPart2 ul li:hover .submenu {
   font-weight: 600;
   text-transform: capitalize !important;
 }
+
 .productItem {
   width: 100%;
   height: auto;
@@ -769,6 +852,7 @@ nav .navPart2 ul li:hover .submenu {
   position: relative;
   border-radius: 10px !important;
 }
+
 .productItem .badge {
   display: inline-block;
   padding: 7px 10px;
@@ -777,16 +861,20 @@ nav .navPart2 ul li:hover .submenu {
   left: 10px;
   z-index: 100;
 }
+
 .badge-primary {
   background-color: #1d84b8 !important;
 }
+
 .productItem .info {
   padding: 15px;
 }
+
 .productItem .info h4 {
   font-size: 18px;
   font-weight: 600;
 }
+
 .info .oldPrice {
   font-size: 16px;
   font-weight: bold;
@@ -794,10 +882,12 @@ nav .navPart2 ul li:hover .submenu {
   text-decoration: line-through;
   align-self: center;
 }
+
 .info .newPrice {
   font-size: 18px;
   font-weight: bold;
 }
+
 .productItem .actions {
   position: absolute;
   top: 20px;
@@ -809,6 +899,7 @@ nav .navPart2 ul li:hover .submenu {
   gap: 10px;
   transition: all 0.3s ease-in-out;
 }
+
 .productItem .actions button {
   display: flex;
   align-items: center;
@@ -824,6 +915,7 @@ nav .navPart2 ul li:hover .submenu {
     0 1px 2px rgb(0 0 0 /24%) !important;
   transition: all 0.2s !important;
 }
+
 .productItem .actions button svg {
   color: #000 !important;
   opacity: 0.8;
@@ -831,9 +923,11 @@ nav .navPart2 ul li:hover .submenu {
   font-size: 16px !important;
   font-weight: 500;
 }
+
 .productItem .action button:hover {
   background: #e00a5c !important;
 }
+
 .productItem .action button:hover svg {
   color: #fff !important;
 }
@@ -841,27 +935,43 @@ nav .navPart2 ul li:hover .submenu {
 .productItem .img_wrapper {
   overflow: hidden;
 }
+
 .productItem .img_wrapper img {
   border-radius: 10px !important;
 }
+
 .productItem .img_wrapper:hover .actions {
   opacity: 1;
 }
+
 .swiper {
   padding-right: 1px !important;
 }
+
 .homeCate {
   padding: 25px 0;
 }
+
 .homeCate .info2 {
   font-size: 20px;
   font-weight: bold;
   padding: 10px 0px;
   font-style: oblique;
 }
+
 .homeCate .swiper {
   overflow: inherit !important;
+
 }
+
+.homeCate .swiper .swiper-wrapper {
+  justify-content: space-around;
+}
+
+.homeCate .swiper .swiper-slide {
+  width: 150px !important;
+}
+
 .homeCate .swiper .item {
   align-items: center;
   border: 1px solid #0000001a;
@@ -875,6 +985,7 @@ nav .navPart2 ul li:hover .submenu {
   transition: all 0.2s ease-in-out;
   width: 120px;
 }
+
 @keyframes mover {
   0% {
     transform: translateY(0);
@@ -884,6 +995,7 @@ nav .navPart2 ul li:hover .submenu {
     transform: translateY(-5px);
   }
 }
+
 .homeCate .swiper .item:hover img {
   animation: mover 0.7s infinite alternate;
 }
@@ -902,7 +1014,9 @@ nav .navPart2 ul li:hover .submenu {
   text-align: center;
   text-transform: capitalize;
   width: 100%;
+  white-space: nowrap;
 }
+
 .homeCate .swiper .item:hover {
   background: #ccc;
   box-shadow:
@@ -930,6 +1044,7 @@ nav .navPart2 ul li:hover .submenu {
 .swiper-button-next {
   right: 3% !important;
 }
+
 .swiper-button-prev {
   left: 3% !important;
 }
@@ -952,6 +1067,7 @@ nav .navPart2 ul li:hover .submenu {
   width: 45px !important;
   z-index: 100;
 }
+
 .swiper-button-next svg,
 .swiper-button-prev svg {
   width: 10px !important;
@@ -963,6 +1079,7 @@ nav .navPart2 ul li:hover .submenu {
   flex-wrap: wrap;
   gap: 10px;
 }
+
 .productRow2 .productItem {
   width: 24%;
   overflow: hidden;
@@ -1043,6 +1160,7 @@ nav .navPart2 ul li:hover .submenu {
   text-transform: capitalize !important;
   top: 6px;
 }
+
 footer {
   background: #fff;
   height: 500px;
@@ -1130,12 +1248,14 @@ footer .linksWrap ul li a:hover {
   color: #000c !important;
   font-size: 20px !important;
 }
+
 hr {
   border: 0;
   border-top: 1px solid #0000007a;
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
+
 .productZoom {
   border-radius: 15px;
   height: auto;
@@ -1158,6 +1278,22 @@ hr {
 .productZoomBig {
   overflow: hidden;
   height: 300px !important;
+  width: 100% !important;
+}
+
+
+.iiz {
+  width: 100% !important;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: block;
+  height: 100% !important;
+}
+
+.iiz__img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
 }
 
 .zoomSlider {
@@ -1210,6 +1346,7 @@ hr {
 .info .oldPrice .lg {
   font-size: 20px;
 }
+
 .info .newPrice .lg {
   font-size: 20px;
 }
@@ -1281,6 +1418,7 @@ hr {
   text-align: center;
   width: 30px;
 }
+
 .productModal .actions button {
   border: 1px solid #0000001a !important;
   color: #000 !important;
@@ -1363,6 +1501,7 @@ hr {
 .product_Listing_Page .productListing .sidebar .scroll .MuiTypography-root {
   font-size: 13px !important;
 }
+
 .MuiRadio-root {
   zoom: 85% !important;
 }
@@ -1417,12 +1556,7 @@ hr {
   width: 100%;
 }
 
-.product_Listing_Page
-  .productListing
-  .content_right
-  .showBy
-  .btnWrapper
-  button {
+.product_Listing_Page .productListing .content_right .showBy .btnWrapper button {
   border-radius: 50% !important;
   color: #000;
   height: 35px !important;
@@ -1430,35 +1564,17 @@ hr {
   width: 35px !important;
 }
 
-.product_Listing_Page
-  .productListing
-  .content_right
-  .showBy
-  .btnWrapper
-  button
-  svg {
+.product_Listing_Page .productListing .content_right .showBy .btnWrapper button svg {
   color: #000;
   font-size: 18px !important;
   opacity: 0.3;
 }
 
-.product_Listing_Page
-  .productListing
-  .content_right
-  .showBy
-  .btnWrapper
-  button.act
-  svg {
+.product_Listing_Page .productListing .content_right .showBy .btnWrapper button.act svg {
   opacity: 1 !important;
 }
 
-.product_Listing_Page
-  .productListing
-  .content_right
-  .showBy
-  .btnWrapper
-  button:hover
-  svg {
+.product_Listing_Page .productListing .content_right .showBy .btnWrapper button:hover svg {
   opacity: 1;
 }
 
@@ -1789,11 +1905,13 @@ hr {
   height: 200px;
   padding-top: 25px;
 }
+
 .reviewScroll {
   max-height: 400px;
   overflow-y: scroll;
   padding-right: 20px;
 }
+
 .progressBarBox {
   margin-bottom: 10px;
 }
@@ -1907,6 +2025,7 @@ a:hover {
   font-weight: 800 !important;
   padding-bottom: 15px;
 }
+
 .signInPage {
   height: 100vh;
   overflow: hidden;
@@ -1970,6 +2089,16 @@ a:hover {
   position: relative;
   width: 400px;
   z-index: 100;
+  font-family: 'Montserrat';
+  color: #6d4aae !important;
+}
+
+.signInPage .box .imgSignIn img {
+  border-radius: 7px !important;
+  font-size: 16px;
+  height: 50px !important;
+  width: 50px !important;
+
 }
 
 .signInPage .box h2 {
@@ -1979,6 +2108,8 @@ a:hover {
 
 .signInPage .box form {
   padding: 20px 30px;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 7px !important;
 }
 
 .signInPage .box .form-group {
@@ -1988,6 +2119,14 @@ a:hover {
 .signInPage .box .txt {
   font-size: 14px;
   font-weight: 700;
+}
+
+.signInPage .box form .line {
+  background-color: #dbdbdb;
+  flex: 1;
+  width: 100%;
+  height: 1px !important;
+
 }
 
 .loginWithGoogle {

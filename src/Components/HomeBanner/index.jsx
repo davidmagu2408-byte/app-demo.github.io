@@ -1,23 +1,27 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Autoplay, Navigation } from "swiper/modules";
+import "swiper/css/pagination";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 const HomeBanner = () => {
   return (
     <>
       <div className="container">
-        <div className="homeBannerSection">
+        <div className="homeBannerSection mt-1">
           <Swiper
             slidesPerView={1}
-            spaceBetween={15}
-            navigation={true}
-            loop={false}
+            spaceBetween={10}
+            pagination={{ clickable: true }}
+            loop={true}
+            allowTouchMove={false}
+            speed={5000}
             autoplay={{
-              delay: 2500,
+              delay: 1000,
               disableOnInteraction: false,
+              reverseDirection: true,
             }}
-            modules={[Navigation, Autoplay]}
+            modules={[Navigation, Autoplay, Pagination]}
             className="mySwiper"
           >
             <SwiperSlide>

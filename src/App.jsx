@@ -13,22 +13,32 @@ import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
+import { fetchDataFromAPI } from "./apis/api";
 
 const MyContext = createContext();
 
 function App() {
   const [countryList, setContryList] = useState([]);
   const [selectedCountry, setselectedCountry] = useState("");
-  const [isOpenProductModal, setisOpenProductModal] = useState(false);
+  const [isOpenProductModal, setisOpenProductModal] = useState({
+    id: "",
+    open: false,
+  });
   const [isOpenHeaderFooterShow, setisOpenHeaderFooterShow] = useState(true);
+  const [categoryData, setCategoryData] = useState([]);
+  const [subcategoryData, setSubcategoryData] = useState([]);
+  const [productData, setProductData] = useState([]);
 
   useEffect(() => {
-    getCountry("https://countriesnow.space/api/v0.1/countries");
+    fetchDataFromAPI("/category").then((data) => setCategoryData(data));
+    fetchDataFromAPI("/subcategory").then((data) => setSubcategoryData(data));
+    fetchDataFromAPI("/product").then((data) => setProductData(data));
+    getCountry("https://provinces.open-api.vn/api/v2");
   }, []);
 
   const getCountry = async (url) => {
     await axios.get(url).then((res) => {
-      setContryList(res.data.data);
+      setContryList(res.data);
     });
   };
   const values = {
@@ -39,6 +49,12 @@ function App() {
     setisOpenProductModal,
     isOpenHeaderFooterShow,
     setisOpenHeaderFooterShow,
+    categoryData,
+    subcategoryData,
+    productData,
+    setCategoryData,
+    setSubcategoryData,
+    setProductData,
   };
 
   return (
@@ -55,12 +71,12 @@ function App() {
           />
           <Route path="/cart" exact={true} element={<Cart />} />
           <Route path="/checkout" exact={true} element={<Checkout />} />
-          <Route path="/signIn" exact={true} element={<SignIn />} />
+          <Route path="/login" exact={true} element={<SignIn />} />
           <Route path="/signUp" exact={true} element={<SignUp />} />
         </Routes>
         {isOpenHeaderFooterShow === true && <Footer />}
 
-        {isOpenProductModal === true && <ProductModal />}
+        {isOpenProductModal.open === true && <ProductModal />}
       </MyContext.Provider>
     </BrowserRouter>
   );

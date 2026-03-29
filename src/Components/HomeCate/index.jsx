@@ -1,25 +1,14 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
-import { useState } from "react";
+import { Navigation, Virtual } from "swiper/modules";
+import { useContext } from "react";
+import { MyContext } from "../../App";
 
 const HomeCate = () => {
-  const [itemBg, setItemBg] = useState([
-    "#fffceb",
-    "#ecffec",
-    "#feefea",
-    "#fff3eb",
-    "#fff3ff",
-    "#f2fce4",
-    "#fffceb",
-    "#ecffec",
-    "#feefea",
-    "#fff3eb",
-    "#fff3ff",
-    "#f2fce4",
-  ]);
-  console.log(setItemBg);
+  const context = useContext(MyContext);
+  const categoryData = context.categoryData;
+
   return (
     <>
       <div className="container">
@@ -31,25 +20,25 @@ const HomeCate = () => {
               spaceBetween={30}
               navigation={true}
               slidesPerGroup={3}
-              modules={[Navigation]}
+              modules={[Navigation, Virtual]}
               className="mySwiper"
+              virtual
             >
-              {itemBg?.map((item, index) => {
-                return (
-                  <SwiperSlide>
-                    <div
-                      className="item text-center cursor"
-                      style={{ background: item }}
-                    >
-                      <img
-                        src="https://nest.botble.com/storage/product-categories/image-9.png"
-                        alt=""
-                      />
-                    </div>
-                    <h6>Red Apple</h6>
-                  </SwiperSlide>
-                );
-              })}
+              {categoryData.category &&
+                categoryData.category.length > 0 &&
+                categoryData.category?.map((item) => {
+                  return (
+                    <SwiperSlide key={item.id}>
+                      <div
+                        className="item text-center cursor"
+                        style={{ background: item.color }}
+                      >
+                        <img src={item.images} alt="category" />
+                      </div>
+                      <h6>{item.name}</h6>
+                    </SwiperSlide>
+                  );
+                })}
             </Swiper>
           </div>
         </section>

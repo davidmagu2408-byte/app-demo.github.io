@@ -1,41 +1,54 @@
 import { Link } from "react-router-dom";
-import Logo from "../../assests/images/logo.jpg";
+import Logo from "../../assets/images/logo.webp";
 import CountryDropDown from "../CountryDropDown";
 import Button from "@mui/material/Button";
 import { IoBagOutline } from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
 import SearchBox from "./SearchBox";
 import Navigation from "./Navigation";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { MyContext } from "../../App";
+import LoadingBar from "../LoadingBar";
 
 const Header = () => {
   const context = useContext(MyContext);
+  const [progress, setProgress] = useState(0);
+
+  const handleRefresh = () => {
+    // 1. Start the bar
+    setProgress(30);
+
+    // 2. Scroll to top immediately
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // 3. Simulate loading (or real data fetch)
+    setTimeout(() => setProgress(70), 300);
+
+    setTimeout(() => {
+      setProgress(100);
+      // 4. Reset bar after completion
+      setTimeout(() => setProgress(0), 400);
+    }, 800);
+  };
   return (
     <>
       <div className="headerWrapper">
-        <div className="top-strip bg-blue">
-          <div className="container">
-            <p className="mb-0 mt-0 text-center">
-              {" "}
-              Due to the <b>COVID 19</b> epidemic, orders may be processed with
-              a slight delay
-            </p>
-          </div>
-        </div>
+        <LoadingBar progress={progress} />
         <header className="header">
           <div className="container">
             <div className="row">
               <div className="logoWrapper d-flex align-items-center col-sm-2">
-                <Link to={"/"}>
-                  <img src={Logo} alt="Logo" />
+                <Link to={"/"} href="/">
+                  <img src={Logo} alt="Logo" onClick={handleRefresh} />
                 </Link>
               </div>
               <div className="col-sm-10 d-flex align-items-center part2">
-                {context.countryList.lenght !== 0 && <CountryDropDown />}
+                {context.countryList && context.countryList.lenght !== 0 && (
+                  <CountryDropDown />
+                )}
                 <SearchBox />
                 <div className="part3 d-flex align-items-center">
-                  <a href="/SignIn">
+                  <a href="/login">
                     <Button className="circle">
                       <FiUser />
                     </Button>
@@ -58,7 +71,6 @@ const Header = () => {
             </div>
           </div>
         </header>
-
         <Navigation />
       </div>
     </>

@@ -2,11 +2,15 @@ import { FiMenu } from "react-icons/fi";
 import Button from "@mui/material/Button";
 import { FaAngleDown } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaAngleRight } from "react-icons/fa6";
+import { MyContext } from "../../../App";
 
 const Navigation = () => {
   const [isopenSidebarNav, setisopenSidebarNav] = useState(false);
+  const context = useContext(MyContext);
+  const categoryData = context.categoryData;
+  const subcategoryData = context.subcategoryData;
 
   return (
     <>
@@ -33,140 +37,63 @@ const Navigation = () => {
                   className={`sidebarNav ${isopenSidebarNav === true ? "open" : ""}`}
                 >
                   <ul>
-                    <li>
-                      <Link to="/">
-                        <Button>
-                          Fashion
-                          <FaAngleRight className="ms-auto" />
-                        </Button>
-                      </Link>
-                      <div className="submenu">
-                        <Link to="/">
-                          <Button>Men</Button>
-                        </Link>
-                        <Link to="/">
-                          <Button>Men</Button>
-                        </Link>
-                        <Link to="/">
-                          <Button>Women</Button>
-                        </Link>
-                        <Link to="/">
-                          <Button>Children</Button>
-                        </Link>
-                      </div>
-                    </li>
-                    <li>
-                      <Link to="/">
-                        <Button>ELectronics</Button>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/">
-                        <Button>Children</Button>
-                      </Link>
-                    </li>
+                    {categoryData.category &&
+                      categoryData.category.length > 0 &&
+                      categoryData.category.map((item) => {
+                        return (
+                          <li key={item.id}>
+                            <Link to="/">
+                              <Button>
+                                {item.name}
+                                <FaAngleRight className="ms-auto" />
+                              </Button>
+                            </Link>
+                            <div className="submenu">
+                              {subcategoryData.subCategory &&
+                                subcategoryData.subCategory.length > 0 &&
+                                subcategoryData.subCategory
+                                  .filter((sub) => sub.category === item.id)
+                                  .map((it) => {
+                                    return (
+                                      <Link to="/" key={it.id}>
+                                        <Button>{it.name}</Button>
+                                      </Link>
+                                    );
+                                  })}
+                            </div>
+                          </li>
+                        );
+                      })}
                   </ul>
                 </div>
               </div>
             </div>
             <div className="col-sm-10 navPart2 d-flex justify-items-center">
               <ul className="list list-inline ms-auto me-5">
-                <li className="list-inline-item">
-                  <Link to="/">
-                    <Button>Fashion</Button>
-                  </Link>
-                  <div className="submenu shadow">
-                    <Link to="/">
-                      <Button>Men</Button>
-                    </Link>
-                    <Link to="/">
-                      <Button>Women</Button>
-                    </Link>
-                    <Link to="/">
-                      <Button>Children</Button>
-                    </Link>
-                  </div>
-                </li>
-                <li className="list-inline-item">
-                  <Link to="/">
-                    <Button>ELectronics</Button>
-                  </Link>
-                  <div className="submenu shadow">
-                    <Link to="/">
-                      <Button>Phone</Button>
-                    </Link>
-                    <Link to="/">
-                      <Button>Laptop</Button>
-                    </Link>
-                    <Link to="/">
-                      <Button>PC</Button>
-                    </Link>
-                  </div>
-                </li>
-                <li className="list-inline-item">
-                  <Link to="/">
-                    <Button>ELectronics</Button>
-                  </Link>
-                  <div className="submenu shadow">
-                    <Link to="/">
-                      <Button>Phone</Button>
-                    </Link>
-                    <Link to="/">
-                      <Button>Laptop</Button>
-                    </Link>
-                    <Link to="/">
-                      <Button>PC</Button>
-                    </Link>
-                  </div>
-                </li>
-                <li className="list-inline-item">
-                  <Link to="/">
-                    <Button>ELectronics</Button>
-                  </Link>
-                  <div className="submenu shadow">
-                    <Link to="/">
-                      <Button>Phone</Button>
-                    </Link>
-                    <Link to="/">
-                      <Button>Laptop</Button>
-                    </Link>
-                    <Link to="/">
-                      <Button>PC</Button>
-                    </Link>
-                  </div>
-                </li>
-                <li className="list-inline-item">
-                  <Link to="/">
-                    <Button>ELectronics</Button>
-                  </Link>
-                  <div className="submenu shadow">
-                    <Link to="/">
-                      <Button>Phone</Button>
-                    </Link>
-                    <Link to="/">
-                      <Button>Laptop</Button>
-                    </Link>
-                    <Link to="/">
-                      <Button>PC</Button>
-                    </Link>
-                  </div>
-                </li>
-                <li className="list-inline-item">
-                  <Link to="/">
-                    <Button>ELectronics</Button>
-                  </Link>
-                  <div className="submenu shadow">
-                    <Link to="/">
-                      <Button>Phone</Button>
-                    </Link>
-                    <Link to="/">
-                      <Button>Laptop</Button>
-                    </Link>
-                    <Link to="/">
-                      <Button>PC</Button>
-                    </Link>
-                  </div>
-                </li>
+                {categoryData.category &&
+                  categoryData.category.length > 0 &&
+                  categoryData.category.map((item) => {
+                    return (
+                      <li className="list-inline-item" key={item.id}>
+                        <Link to="/">
+                          <Button>{item.name}</Button>
+                        </Link>
+                        <div className="submenu shadow">
+                          {subcategoryData.subCategory &&
+                            subcategoryData.subCategory.length > 0 &&
+                            subcategoryData.subCategory
+                              .filter((sub) => sub.category === item.id)
+                              .map((it) => {
+                                return (
+                                  <Link to="/" key={it.id}>
+                                    <Button>{it.name}</Button>
+                                  </Link>
+                                );
+                              })}
+                        </div>
+                      </li>
+                    );
+                  })}
               </ul>
             </div>
           </div>
