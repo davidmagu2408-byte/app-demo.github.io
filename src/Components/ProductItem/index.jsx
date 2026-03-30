@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import { TfiFullscreen } from "react-icons/tfi";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { MyContext } from "../../App";
 
 const ProductItem = (props) => {
@@ -17,7 +18,7 @@ const ProductItem = (props) => {
   return (
     <>
       <div className="productItem">
-        <div className="img_wrapper">
+        <Link to={`/product/${props.item._id || props.item.id}`} className="img_wrapper d-block">
           <img src={props.item.images[0]} className="w-100" alt="product" />
           <span className="badge badge-primary">{props.item.discount}%</span>
           <div className="actions">
@@ -31,8 +32,8 @@ const ProductItem = (props) => {
               <IoMdHeartEmpty />
             </Button>
           </div>
-        </div>
-        <div className="info">
+        </Link>
+        <Link to={`/product/${props.item._id || props.item.id}`} className="info d-block text-decoration-none text-dark">
           <h4>{props.item.name}</h4>
           <span className="text-success d-block">
             {props.item.countInStock === 0 ? "Hết hàng" : "Còn hàng"}
@@ -59,7 +60,7 @@ const ProductItem = (props) => {
               })}
             </span>
           </div>
-        </div>
+        </Link>
       </div>
     </>
   );

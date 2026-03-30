@@ -24,15 +24,27 @@ api.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
+
+    // Don't intercept refresh-token requests — prevents infinite loop
+    const isRefreshRequest = originalRequest.url?.includes("/user/refresh-token");
+
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      !originalRequest._retry &&
+      !isRefreshRequest
+    ) {
       originalRequest._retry = true;
       try {
-        const response = await api.post("/refresh-token");
+        const response = await api.get("/user/refresh-token");
         const accessToken = response.data.accessToken;
         localStorage.setItem("accessToken", accessToken);
         api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return api(originalRequest);
       } catch (_error) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("userData");
         return Promise.reject(_error);
       }
     }

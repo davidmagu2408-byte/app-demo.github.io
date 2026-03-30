@@ -2,17 +2,26 @@ import { FaMinus, FaPlus } from "react-icons/fa6";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 
-const QuantityBox = () => {
-  const [inputVal, setInputVal] = useState(0);
+const QuantityBox = ({ value: controlledVal, onChange, max }) => {
+  const [internalVal, setInternalVal] = useState(1);
+  const isControlled = controlledVal !== undefined;
+  const inputVal = isControlled ? controlledVal : internalVal;
 
-  const minus = () => {
-    if (inputVal > 1) {
-      setInputVal(inputVal - 1);
+  const setVal = (v) => {
+    if (isControlled) {
+      onChange?.(v);
+    } else {
+      setInternalVal(v);
     }
   };
 
+  const minus = () => {
+    if (inputVal > 1) setVal(inputVal - 1);
+  };
+
   const plus = () => {
-    setInputVal(inputVal + 1);
+    if (max && inputVal >= max) return;
+    setVal(inputVal + 1);
   };
 
   return (
@@ -20,13 +29,12 @@ const QuantityBox = () => {
       <Button onClick={minus} disabled={inputVal <= 1}>
         <FaMinus />
       </Button>
-
       <input
         type="text"
         value={inputVal}
-        onChange={(e) => setInputVal(e.target.value)}
+        readOnly
       />
-      <Button onClick={plus}>
+      <Button onClick={plus} disabled={max ? inputVal >= max : false}>
         <FaPlus />
       </Button>
     </div>

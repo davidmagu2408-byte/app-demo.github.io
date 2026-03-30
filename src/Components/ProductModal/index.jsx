@@ -9,6 +9,7 @@ import { MdCompareArrows } from "react-icons/md";
 import { MyContext } from "../../App";
 import ProductZoom from "../ProductZoom";
 import { fetchProductById } from "../../apis/api";
+import toast from "react-hot-toast";
 
 const ProductModal = () => {
   const context = useContext(MyContext);
@@ -16,8 +17,10 @@ const ProductModal = () => {
   const id = context.isOpenProductModal.id;
 
   const [product, setProduct] = useState([]);
+  const [qty, setQty] = useState(1);
   useEffect(() => {
     fetchProductById(id).then((data) => setProduct(data));
+    setQty(1);
   }, []);
   console.log("data", product);
 
@@ -112,9 +115,16 @@ const ProductModal = () => {
                 </Button>
               ) : (
                 <>
-                  <QuantityBox />
-                  <Button className="btn-blue btn-lg btn-big btn-round">
-                    Add to Cart
+                  <QuantityBox value={qty} onChange={setQty} max={product.data.countInStock} />
+                  <Button
+                    className="btn-blue btn-lg btn-big btn-round"
+                    onClick={() => {
+                      context.addToCart(product.data, qty);
+                      toast.success("Đã thêm vào giỏ hàng");
+                      context.setisOpenProductModal({ id: "", open: false });
+                    }}
+                  >
+                    Thêm vào giỏ
                   </Button>
                 </>
               )}

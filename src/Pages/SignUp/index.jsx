@@ -5,9 +5,15 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { FcGoogle } from "react-icons/fc";
 import { postData } from "../../apis/api";
+import { useToast } from "../../utils/Toast";
+import { Toast } from "../../utils/Toast";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const context = useContext(MyContext);
+  const { showToast } = useToast();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const [formField, setFormField] = useState({
     email: "",
     password: "",
@@ -29,41 +35,51 @@ const SignUp = () => {
     setConfirmPassword(e.target.value);
   };
 
-  const SignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     if (
-      formField.email === null ||
-      formField.password === null ||
-      formField.name === null ||
-      formField.phone === null ||
-      formField.email === "" ||
-      formField.password === "" ||
-      formField.name === "" ||
-      formField.phone === ""
+      !formField.email.trim() ||
+      !formField.password.trim() ||
+      !formField.name.trim() ||
+      !formField.phone.trim()
     ) {
-      alert("Please enter all fields");
-    } else {
-      formField.isAdmin = false;
-      formField.address = "";
-      formField.images = "";
-      postData("/user/register", formField).then((data) => {
-        console.log(data);
-        if (data && data.success === true) {
-          alert("Register Success");
-          window.location.href = "/login";
-        } else {
-          alert("Register Failed");
-        }
+      showToast("Vui lòng điền đầy đủ thông tin", "error");
+      return;
+    }
+    if (formField.password !== confirmPassword) {
+      showToast("Mật khẩu không khớp", "error");
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const data = await postData("/user/register", {
+        ...formField,
+        address: "",
+        images: "",
       });
+      if (data && data.success === true) {
+        showToast("Đăng ký thành công!", "success");
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500);
+      } else {
+        showToast(data?.message || "Đăng ký thất bại", "error");
+      }
+    } catch (error) {
+      showToast(error.response?.data?.message || "Đăng ký thất bại", "error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     context.setisOpenHeaderFooterShow(false);
-  });
+  }, []);
 
   return (
-    <section className="section signInPage">
+    <>
+      <Toast />
+      <section className="section signInPage">
       <div className="shape-bottom">
         <svg
           width="1921"
@@ -82,7 +98,7 @@ const SignUp = () => {
           <div className="text-center imgSignIn">
             <img src={Logo} alt="Logo" />
           </div>
-          <form className="mt-1" onSubmit={SignUp}>
+          <form className="mt-1" onSubmit={handleSignUp}>
             <h2 className="mb-2">Đăng ký tài khoản</h2>
             <div className="row">
               <div className="col-md-6">
@@ -164,26 +180,32 @@ const SignUp = () => {
               />
             </div>
             <div className="d-flex align-items-center mt-3 mb-3">
-              <Button type="submit" className="btn-blue col btn-lg btn-big">
-                Đăng ký
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="btn-blue col btn-lg btn-big"
+              >
+                {isLoading ? "Đang xử lý..." : "Đăng ký"}
               </Button>
-              <a href="/" variant="outlined">
-                <Button
-                  className="btn-lg btn-big col ms-2"
-                  variant="outlined"
-                  onClick={() => {
-                    context.setisOpenHeaderFooterShow(true);
-                  }}
-                >
-                  Cancel
-                </Button>
-              </a>
+              <Button
+                className="btn-lg btn-big col ms-2"
+                variant="outlined"
+                onClick={() => {
+                  context.setisOpenHeaderFooterShow(true);
+                  navigate("/");
+                }}
+              >
+                Cancel
+              </Button>
             </div>
             <p className="txt">
-              Not Registered?
-              <a className="border-effect" href="/signUp">
-                Sign In
-              </a>
+              Đã có tài khoản?
+              <span
+                className="border-effect ms-1 cursor"
+                onClick={() => navigate("/login")}
+              >
+                Đăng nhập
+              </span>
             </p>
             <h6 className="mt-4 text-center font-weight-bold">
               Or continue with social account
@@ -196,6 +218,7 @@ const SignUp = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

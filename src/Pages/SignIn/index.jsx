@@ -4,19 +4,16 @@ import Logo from "../../assets/images/logo.webp";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { FcGoogle } from "react-icons/fc";
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { firebaseapp } from "../../firebase";
 import { postData } from "../../apis/api";
 import { useToast } from "../../utils/Toast";
 import { Toast } from "../../utils/Toast";
-
-const auth = getAuth(firebaseapp);
-const provider = new GoogleAuthProvider();
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const context = useContext(MyContext);
   const { showToast, closeToast } = useToast();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const [formfield, setformfield] = useState({
     email: "",
     password: "",
@@ -29,49 +26,41 @@ const SignIn = () => {
     });
   };
 
-  const signIn = (e) => {
+  const signIn = async (e) => {
     e.preventDefault();
-    if (
-      formfield.email === null ||
-      formfield.password === null ||
-      formfield.email === "" ||
-      formfield.password === ""
-    ) {
-      alert("Please enter email and password");
-    } else {
-      try {
-        postData("/user/login", formfield).then((data) => {
-          if (data && data.user.isAdmin === false) {
-            localStorage.setItem(
-              "accessToken",
-              JSON.stringify(data.accessToken),
-            );
-            localStorage.setItem("userData", JSON.stringify(data.user));
-            showToast(data.message, "success");
-            setTimeout(() => {
-              window.location.href = "/";
-              context.setisOpenHeaderFooterShow(true);
-              closeToast();
-            }, 2000);
-          } else {
-            showToast(data.message, "success");
-            setTimeout(() => {
-              window.location.href = "/login";
-              context.setisOpenHeaderFooterShow(false);
-              closeToast();
-            }, 2000);
-          }
-        });
-      } catch (error) {
-        const errMessage = error.response?.data?.message || error.message;
-        showToast(errMessage, "error");
+    if (!formfield.email.trim() || !formfield.password.trim()) {
+      showToast("Vui lòng nhập email và mật khẩu", "error");
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const data = await postData("/user/login", formfield);
+      if (data && data.success === true) {
+        if (data.user.isAdmin === true) {
+          showToast("Tài khoản Admin không thể đăng nhập tại đây", "error");
+        } else {
+          localStorage.setItem("accessToken", data.accessToken);
+          context.setAccessToken(data.accessToken);
+          context.setUser(data.user);
+          showToast(data.message, "success");
+          setTimeout(() => {
+            context.setisOpenHeaderFooterShow(true);
+            navigate("/");
+          }, 1000);
+        }
+      } else {
+        showToast(data?.message || "Đăng nhập thất bại", "error");
       }
+    } catch (error) {
+      showToast(error.response?.data?.message || "Đăng nhập thất bại", "error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     context.setisOpenHeaderFooterShow(false);
-  });
+  }, []);
 
   return (
     <>
@@ -129,26 +118,32 @@ const SignIn = () => {
                 Quên mật khẩu?
               </a>
               <div className="d-flex align-items-center mt-3 mb-3">
-                <Button type="submit" className="btn-blue col btn-lg btn-big">
-                  Sign In
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  className="btn-blue col btn-lg btn-big"
+                >
+                  {isLoading ? "Đang đăng nhập..." : "Sign In"}
                 </Button>
-                <a href="/" variant="outlined">
-                  <Button
-                    className="btn-lg btn-big col ms-2"
-                    variant="outlined"
-                    onClick={() => {
-                      context.setisOpenHeaderFooterShow(true);
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                </a>
+                <Button
+                  className="btn-lg btn-big col ms-2"
+                  variant="outlined"
+                  onClick={() => {
+                    context.setisOpenHeaderFooterShow(true);
+                    navigate("/");
+                  }}
+                >
+                  Cancel
+                </Button>
               </div>
               <p className="txt">
                 Bạn có tài khoản chưa?
-                <a className="border-effect ms-1" href="/signUp">
+                <span
+                  className="border-effect ms-1 cursor"
+                  onClick={() => navigate("/signUp")}
+                >
                   Đăng kí
-                </a>
+                </span>
               </p>
               <div className="d-flex align-items-center">
                 <div className="line" />

@@ -3,91 +3,144 @@ import Button from "@mui/material/Button";
 import { IoIosMenu } from "react-icons/io";
 import { BiSolidGrid } from "react-icons/bi";
 import { TfiLayoutGrid4Alt } from "react-icons/tfi";
-import { FaAngleDown } from "react-icons/fa";
-import { useState } from "react";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Fade from "@mui/material/Fade";
+import { useContext, useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import ProductItem from "../../Components/ProductItem";
 import Pagination from "@mui/material/Pagination";
+import { fetchDataFromAPI } from "../../apis/api";
+import { MyContext } from "../../App";
 
 const Listing = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const subCatId = searchParams.get("subCat");
+  const context = useContext(MyContext);
+
   const [productView, setproductView] = useState("four");
-  const openDrop = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const perPage = 12;
+
+  // Find current category/subcategory names
+  const categoryData = context.categoryData;
+  const subcategoryData = context.subcategoryData;
+  const currentCat = categoryData?.category?.find(
+    (c) => c._id === id || c.id === id
+  );
+  const currentSubCat = subCatId
+    ? subcategoryData?.subCategory?.find(
+        (s) => s._id === subCatId || s.id === subCatId
+      )
+    : null;
+
+  useEffect(() => {
+    setLoading(true);
+    setPage(1);
+    const endpoint = subCatId
+      ? `/product/subcategory/${subCatId}`
+      : `/product/category/${id}`;
+    fetchDataFromAPI(endpoint).then((data) => {
+      if (data?.success) {
+        setProducts(data.products);
+      } else {
+        setProducts([]);
+      }
+      setLoading(false);
+    });
+  }, [id, subCatId]);
+
+  const totalPages = Math.max(1, Math.ceil(products.length / perPage));
+  const paginatedProducts = products.slice(
+    (page - 1) * perPage,
+    page * perPage
+  );
+
   return (
     <>
       <section className="product_Listing_Page">
         <div className="container">
           <div className="productListing d-flex">
-            <SideBar />
+            <SideBar
+              categoryId={id}
+              subCatId={subCatId}
+            />
             <div className="content_right">
-              <div class="showBy mt-0 mb-3 d-flex align-items-center">
-                <div class="d-flex align-items-center btnWrapper">
+              <div className="showBy mt-0 mb-3 d-flex align-items-center">
+                <div className="d-flex align-items-center btnWrapper">
                   <Button
-                    className={console.log(productView === "one" && "act")}
-                    onClick={() => {
-                      setproductView("one");
-                    }}
+                    className={productView === "one" ? "act" : ""}
+                    onClick={() => setproductView("one")}
                   >
                     <IoIosMenu />
                   </Button>
                   <Button
-                    className={productView === "three" && "act"}
-                    onClick={() => {
-                      setproductView("three");
-                    }}
+                    className={productView === "three" ? "act" : ""}
+                    onClick={() => setproductView("three")}
                   >
                     <BiSolidGrid />
                   </Button>
                   <Button
-                    className={productView === "four" && "act"}
-                    onClick={() => {
-                      setproductView("four");
-                    }}
+                    className={productView === "four" ? "act" : ""}
+                    onClick={() => setproductView("four")}
                   >
                     <TfiLayoutGrid4Alt />
                   </Button>
                 </div>
-                <div class="ms-auto showByFilter">
-                  <Button onClick={handleClick}>
-                    Show 9 <FaAngleDown />
-                  </Button>
-                  <Menu
-                    id="basic-menu showPerPageDropdown"
-                    slotProps={{
-                      list: {
-                        "aria-labelledby": "fade-button",
-                      },
-                    }}
-                    slots={{ transition: Fade }}
-                    anchorEl={anchorEl}
-                    open={openDrop}
-                    onClose={handleClose}
-                  >
-                    <MenuItem onClick={handleClose}>40</MenuItem>
-                    <MenuItem onClick={handleClose}>50</MenuItem>
-                    <MenuItem onClick={handleClose}>60</MenuItem>
-                  </Menu>
+                <div className="ms-auto">
+                  <h6 className="mb-0">
+                    {currentSubCat
+                      ? currentSubCat.name
+                      : currentCat?.name || "Sản phẩm"}
+                    <span className="text-light ms-2" style={{ fontSize: 13 }}>
+                      ({products.length} sản phẩm)
+                    </span>
+                  </h6>
                 </div>
               </div>
-              <div className="productListing">
-                <ProductItem itemView={productView} />
-                <ProductItem itemView={productView} />
-                <ProductItem itemView={productView} />
-                <ProductItem itemView={productView} />
-                <ProductItem itemView={productView} />
-                <ProductItem itemView={productView} />
-              </div>
-              <div className="d-flex align-items-center justify-content-center mt-3">
-                <Pagination count={10} color="primary" />
-              </div>
+
+              {loading ? (
+                <div className="text-center py-5">
+                  <p>Đang tải...</p>
+                </div>
+              ) : products.length === 0 ? (
+                <div className="text-center py-5">
+                  <h5>Không có sản phẩm nào</h5>
+                </div>
+              ) : (
+                <>
+                  <div
+                    className={`productListing ${
+                      productView === "one"
+                        ? "list"
+                        : productView === "three"
+                          ? "three"
+                          : ""
+                    }`}
+                  >
+                    {paginatedProducts.map((item) => (
+                      <ProductItem
+                        key={item._id}
+                        item={item}
+                        itemView={productView}
+                      />
+                    ))}
+                  </div>
+                  {totalPages > 1 && (
+                    <div className="d-flex align-items-center justify-content-center mt-3">
+                      <Pagination
+                        count={totalPages}
+                        page={page}
+                        onChange={(_, v) => {
+                          setPage(v);
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
+                        color="primary"
+                      />
+                    </div>
+                  )}
+                </>
+              )}
             </div>
           </div>
         </div>

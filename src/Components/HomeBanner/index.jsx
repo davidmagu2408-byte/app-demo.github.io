@@ -3,55 +3,74 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { useEffect, useState, useCallback } from "react";
+import { fetchDataFromAPI } from "../../apis/api";
 
 const HomeBanner = () => {
+  const [banners, setBanners] = useState([]);
+
+  useEffect(() => {
+    fetchDataFromAPI("/banner").then((data) => {
+      if (data?.bannerList) {
+        setBanners(data.bannerList);
+      }
+    });
+  }, []);
+
+  const handleReachEnd = useCallback((swiper) => {
+    swiper.params.autoplay.reverseDirection = true;
+  }, []);
+
+  const handleReachBeginning = useCallback((swiper) => {
+    swiper.params.autoplay.reverseDirection = false;
+  }, []);
+
   return (
     <>
       <div className="container">
         <div className="homeBannerSection mt-1">
-          <Swiper
-            slidesPerView={1}
-            spaceBetween={10}
-            pagination={{ clickable: true }}
-            loop={true}
-            allowTouchMove={false}
-            speed={5000}
-            autoplay={{
-              delay: 1000,
-              disableOnInteraction: false,
-              reverseDirection: true,
-            }}
-            modules={[Navigation, Autoplay, Pagination]}
-            className="mySwiper"
-          >
-            <SwiperSlide>
-              <div className="item">
-                <img
-                  src="https://eu.louisvuitton.com/images/is/image//content/dam/lv/editorial-content/New-Homepage/2026/central/collections/women-show-ss26/WOMEN_SHOW_SS26_HP_Push_feb27_DI3.jpg?wid=1440"
-                  alt="banner"
-                  className=""
-                ></img>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="item">
-                <img
-                  src="https://eu.louisvuitton.com/images/is/image//content/dam/lv/editorial-content/New-Homepage/2026/central/collections/women-show-ss26/WOMEN_SHOW_SS26_HP_Push_feb27_DI3.jpg?wid=1440"
-                  alt="banner"
-                  className=""
-                ></img>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="item">
-                <img
-                  src="https://eu.louisvuitton.com/images/is/image//content/dam/lv/editorial-content/New-Homepage/2026/central/collections/women-show-ss26/WOMEN_SHOW_SS26_HP_Push_feb27_DI3.jpg?wid=1440"
-                  alt="banner"
-                  className=""
-                ></img>
-              </div>
-            </SwiperSlide>
-          </Swiper>
+          {banners.length > 0 ? (
+            <Swiper
+              slidesPerView={1}
+              spaceBetween={0}
+              pagination={{ clickable: true }}
+              navigation={true}
+              speed={800}
+              autoplay={{
+                delay: 4000,
+                disableOnInteraction: false,
+                reverseDirection: false,
+              }}
+              onReachEnd={handleReachEnd}
+              onReachBeginning={handleReachBeginning}
+              modules={[Navigation, Autoplay, Pagination]}
+              className="mySwiper"
+            >
+              {banners.map((banner) =>
+                banner.images?.map((img, i) => (
+                  <SwiperSlide key={`${banner.id}-${i}`}>
+                    <div className="item">
+                      <img src={img} alt={banner.name} />
+                    </div>
+                  </SwiperSlide>
+                )),
+              )}
+            </Swiper>
+          ) : (
+            <div
+              className="item placeholder-banner"
+              style={{
+                height: "400px",
+                background: "#f0f0f0",
+                borderRadius: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <p style={{ color: "#999" }}>Đang tải banner...</p>
+            </div>
+          )}
         </div>
       </div>
     </>

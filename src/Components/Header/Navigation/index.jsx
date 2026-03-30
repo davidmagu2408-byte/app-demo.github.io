@@ -42,7 +42,7 @@ const Navigation = () => {
                       categoryData.category.map((item) => {
                         return (
                           <li key={item.id}>
-                            <Link to="/">
+                            <Link to={`/cat/${item._id}`}>
                               <Button>
                                 {item.name}
                                 <FaAngleRight className="ms-auto" />
@@ -55,7 +55,7 @@ const Navigation = () => {
                                   .filter((sub) => sub.category === item.id)
                                   .map((it) => {
                                     return (
-                                      <Link to="/" key={it.id}>
+                                      <Link to={`/cat/${item._id}?subCat=${it._id}`} key={it.id}>
                                         <Button>{it.name}</Button>
                                       </Link>
                                     );
@@ -75,7 +75,7 @@ const Navigation = () => {
                   categoryData.category.map((item) => {
                     return (
                       <li className="list-inline-item" key={item.id}>
-                        <Link to="/">
+                        <Link to={`/cat/${item._id}`}>
                           <Button>{item.name}</Button>
                         </Link>
                         <div className="submenu shadow">
@@ -85,7 +85,7 @@ const Navigation = () => {
                               .filter((sub) => sub.category === item.id)
                               .map((it) => {
                                 return (
-                                  <Link to="/" key={it.id}>
+                                  <Link to={`/cat/${item._id}?subCat=${it._id}`} key={it.id}>
                                     <Button>{it.name}</Button>
                                   </Link>
                                 );
