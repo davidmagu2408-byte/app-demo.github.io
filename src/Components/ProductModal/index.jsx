@@ -12,16 +12,18 @@ import { fetchProductById } from "../../apis/api";
 
 const ProductModal = () => {
   const context = useContext(MyContext);
-  if (!context.isOpenProductModal.id) return null;
   const id = context.isOpenProductModal.id;
 
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState(null);
   useEffect(() => {
+    if (!id) return;
+    setProduct(null);
     fetchProductById(id).then((data) => setProduct(data));
-  }, []);
-  console.log("data", product);
+  }, [id]);
 
-  if (!product.data) return null;
+  if (!id) return null;
+
+  if (!product || !product.data) return null;
 
   return (
     <>
