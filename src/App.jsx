@@ -51,7 +51,7 @@ function App() {
         updated = prev.map((item) =>
           item.productId === product.id
             ? { ...item, quantity: item.quantity + qty }
-            : item
+            : item,
         );
       } else {
         updated = [
@@ -75,7 +75,7 @@ function App() {
   const updateCartQty = useCallback((productId, qty) => {
     setCartData((prev) => {
       const updated = prev.map((item) =>
-        item.productId === productId ? { ...item, quantity: qty } : item
+        item.productId === productId ? { ...item, quantity: qty } : item,
       );
       localStorage.setItem("cart", JSON.stringify(updated));
       return updated;

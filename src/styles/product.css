@@ -1,0 +1,491 @@
+/* Product Item Card */
+.productItem {
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    border-radius: 10px !important;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+    will-change: transform;
+}
+
+.productItem:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.productItem .badge {
+    display: inline-block;
+    padding: 7px 10px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+}
+
+.badge-primary {
+    background-color: #1d84b8 !important;
+}
+
+.productItem .info {
+    padding: 15px;
+}
+
+.productItem .info h4 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.info .oldPrice {
+    font-size: 16px;
+    font-weight: bold;
+    color: #636161 !important;
+    text-decoration: line-through;
+    align-self: center;
+}
+
+.info .newPrice {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.productItem .actions {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    opacity: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateX(8px);
+}
+
+.productItem:hover .actions {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.productItem .actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px !important;
+    height: 40px !important;
+    width: 40px !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 50% !important;
+    background: #fff !important;
+    box-shadow:
+        0 1px 3px rgb(0 0 0 /12%),
+        0 1px 2px rgb(0 0 0 /24%) !important;
+    transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.productItem .actions button:hover {
+    background: #ed174a !important;
+    transform: scale(1.1);
+}
+
+.productItem .actions button:hover svg {
+    color: #fff !important;
+    opacity: 1;
+}
+
+.productItem .actions button svg {
+    color: #000 !important;
+    opacity: 0.8;
+    pointer-events: none;
+    font-size: 16px !important;
+    font-weight: 500;
+}
+
+.productItem .actions button:disabled {
+    opacity: 0.4 !important;
+    cursor: not-allowed;
+    pointer-events: auto;
+}
+
+.productItem .actions button:disabled:hover {
+    background: #fff !important;
+    transform: none;
+}
+
+.productItem .action button:hover {
+    background: #e00a5c !important;
+}
+
+.productItem .action button:hover svg {
+    color: #fff !important;
+}
+
+.productItem .img_wrapper {
+    overflow: hidden;
+}
+
+.productItem .img_wrapper img {
+    border-radius: 10px !important;
+    height: auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.productItem .img_wrapper:hover .actions {
+    opacity: 1;
+}
+
+.productItem:hover .actions {
+    opacity: 1;
+}
+
+.productItem .img_wrapper .MuiSkeleton-root {
+    align-items: center;
+    display: flex;
+    height: 230px !important;
+    justify-content: center;
+    position: relative;
+    width: 100% !important;
+    z-index: 1000 !important;
+}
+
+.productItem .img_wrapper .MuiSkeleton-root svg {
+    color: #000 !important;
+    font-size: 70px !important;
+    opacity: 0.1 !important;
+    visibility: inherit !important;
+}
+
+.productItem:hover .btn-blue.w-100 {
+    opacity: 1;
+}
+
+/* Product Row */
+.productRow2 {
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.productRow2 .productItem {
+    width: 24%;
+    overflow: hidden;
+    border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Product Listing Page */
+.product_Listing_Page {
+    padding: 25px 0;
+}
+
+.product_Listing_Page .productListing {
+    gap: 20px;
+}
+
+.product_Listing_Page .productListing .sidebar {
+    flex: 0 0 20%;
+    width: 20%;
+}
+
+.product_Listing_Page .productListing .sidebar .filterBox {
+    margin-bottom: 35px;
+}
+
+.product_Listing_Page .productListing .sidebar .filterBox h6 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.product_Listing_Page .productListing .sidebar .scroll {
+    max-height: 180px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding-left: 10px;
+}
+
+.product_Listing_Page .productListing .sidebar .scroll::-webkit-scrollbar {
+    height: 5px !important;
+    width: 5px !important;
+}
+
+.product_Listing_Page .productListing .sidebar .scroll ul {
+    margin-bottom: 0;
+}
+
+.product_Listing_Page .productListing .sidebar .scroll ul li {
+    list-style: none;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.product_Listing_Page .productListing .sidebar .scroll ul li label {
+    margin-bottom: 0 !important;
+}
+
+.product_Listing_Page .productListing .sidebar .scroll ul li * {
+    text-transform: capitalize !important;
+}
+
+.product_Listing_Page .productListing .sidebar .scroll label {
+    margin-bottom: 0 !important;
+}
+
+.product_Listing_Page .productListing .sidebar .scroll .MuiTypography-root {
+    font-size: 13px !important;
+}
+
+.MuiRadio-root {
+    zoom: 85% !important;
+}
+
+.css-vuhw6e-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root {
+    padding: 2px !important;
+}
+
+.css-rizt0-MuiTypography-root {
+    font-size: 13px !important;
+}
+
+.css-1umw9bq-MuiSvgIcon-root {
+    height: 20px !important;
+    width: 20px !important;
+}
+
+.css-vuhw6e-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-checked,
+.css-vuhw6e-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
+    color: #6d4aae !important;
+}
+
+.range-slider {
+    height: 5px !important;
+}
+
+.range-slider .range-slider__range,
+.range-slider .range-slider__thumb {
+    background: #6d4aae !important;
+}
+
+.range-slider .range-slider__thumb {
+    height: 15px !important;
+    width: 15px !important;
+}
+
+.product_Listing_Page .productListing .content_right {
+    flex: 0 0 78%;
+    padding-left: 50px;
+    width: 78%;
+}
+
+.product_Listing_Page .productListing .content_right .showBy {
+    background: #f1f3ff;
+    height: auto;
+    padding: 15px 25px;
+    width: 100%;
+}
+
+.product_Listing_Page .productListing .content_right .showBy .btnWrapper button {
+    border-radius: 50% !important;
+    color: #000;
+    height: 35px !important;
+    min-width: 35px !important;
+    width: 35px !important;
+}
+
+.product_Listing_Page .productListing .content_right .showBy .btnWrapper button svg {
+    color: #000;
+    font-size: 18px !important;
+    opacity: 0.3;
+}
+
+.product_Listing_Page .productListing .content_right .showBy .btnWrapper button.act svg {
+    opacity: 1 !important;
+}
+
+.product_Listing_Page .productListing .content_right .showBy .btnWrapper button:hover svg {
+    opacity: 1;
+}
+
+.showByFilter button {
+    color: #000;
+    min-width: auto !important;
+}
+
+.showByFilter button svg {
+    color: #000;
+    margin-left: 5px;
+    opacity: 0.6;
+}
+
+.showByFilter button.act svg {
+    opacity: 1 !important;
+}
+
+.showPerPageDropdown .MuiPaper-root {
+    width: 80px !important;
+}
+
+.infinite-scroll-component,
+.productListing {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.productListing .productItem.four {
+    width: 23%;
+}
+
+.productListing .productItem.three {
+    width: 31%;
+}
+
+.productListing .productItem.one {
+    align-items: center;
+    display: flex;
+    width: 100%;
+}
+
+.productListing .productItem.one .img_wrapper {
+    width: 25%;
+}
+
+.productItem.three .img_wrapper .slick-slider .slick-slide,
+.productListing .productItem.three .img_wrapper,
+.productListing .productItem.three .img_wrapper .slick-slider {
+    height: 325px;
+}
+
+/* Product Item (listing-specific overrides) */
+.productItem .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 20px;
+    transition: all 0.5s ease-in-out;
+    width: 50px;
+    z-index: 1000;
+}
+
+.productItem .actions button {
+    align-items: center;
+    background: #fff !important;
+    border: 1px solid #0000001a !important;
+    border-radius: 50% !important;
+    box-shadow:
+        0 1px 3px #0000001f,
+        0 1px 2px #0000003d !important;
+    display: flex;
+    height: 40px !important;
+    justify-content: center;
+    min-width: 40px !important;
+    transition: all 0s !important;
+    width: 40px !important;
+}
+
+.productItem .actions button svg {
+    color: #000 !important;
+    font-size: 15px;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.productItem .actions button:hover {
+    background: #ed174a !important;
+    border: 1px solid #ed174a !important;
+}
+
+.productItem .actions button:hover svg {
+    color: #fff !important;
+    opacity: 1 !important;
+}
+
+.productItem .actions button.active {
+    background: #ed174a !important;
+    border: 1px solid #ed174a !important;
+}
+
+.productItem .actions button.active svg {
+    color: #fff !important;
+    opacity: 1 !important;
+}
+
+.productItem .img_wrapper {
+    background: #fff;
+    border-radius: 7px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 230px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.productItem .img_wrapper a {
+    display: block;
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.productItem .img_wrapper a .img2 {
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    z-index: 1000;
+}
+
+.productItem .img_wrapper:hover a .img2 {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.productItem .img_wrapper:hover a .img1 {
+    transform: scale(1.1);
+}
+
+.productItem .img_wrapper .slick-slider {
+    height: 230px;
+    overflow: hidden;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+.productItem .img_wrapper .slick-slider .slick-slide {
+    height: 230px;
+    overflow: hidden !important;
+    padding: 0 !important;
+}
+
+.productItem .img_wrapper .swiper-wrapper {
+    padding: 0 !important;
+}
+
+.productItem .img_wrapper .swiper .swiper-slide {
+    height: 230px;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+.productItem .img_wrapper .slick-dots {
+    bottom: 0 !important;
+    padding: 15px 0;
+    z-index: 100;
+}
+
+.productItem .img_wrapper .slick-dots li {
+    width: 7px !important;
+}
+
+.productItem .img_wrapper .slick-dots li button {
+    opacity: 1;
+}
+
+.productItem .img_wrapper .slick-dots li button:before {
+    color: #fff !important;
+}

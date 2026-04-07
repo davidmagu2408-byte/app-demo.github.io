@@ -73,7 +73,7 @@ const Checkout = () => {
     });
     setWards([]);
     const res = await axios.get(
-      `https://provinces.open-api.vn/api/p/${code}?depth=2`
+      `https://provinces.open-api.vn/api/p/${code}?depth=2`,
     );
     setDistricts(res.data.districts || []);
   };
@@ -89,7 +89,7 @@ const Checkout = () => {
       wardName: "",
     });
     const res = await axios.get(
-      `https://provinces.open-api.vn/api/d/${code}?depth=2`
+      `https://provinces.open-api.vn/api/d/${code}?depth=2`,
     );
     setWards(res.data.wards || []);
   };
@@ -102,7 +102,7 @@ const Checkout = () => {
 
   const subtotal = cartData.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
   const shippingFee = subtotal >= 500000 ? 0 : 30000;
   const total = subtotal + shippingFee;
@@ -140,21 +140,36 @@ const Checkout = () => {
         note: form.note,
       };
 
+      if (form.paymentMethod === "momo") {
+        // MoMo payment — create order via MoMo endpoint and redirect
+        const { data } = await api.post("/momo/create", payload);
+        if (data.success && data.payUrl) {
+          clearCart();
+          window.location.href = data.payUrl;
+          return;
+        } else {
+          showToast(data.message || "Không thể tạo thanh toán MoMo", "error");
+          setIsLoading(false);
+          return;
+        }
+      }
+
       const { data } = await api.post("/order/create", payload);
       if (data.success) {
         clearCart();
         showToast("Đặt hàng thành công!", "success");
         setTimeout(() => {
-          navigate(`/order/${data.order._id}`);
+          if (form.paymentMethod === "banking") {
+            navigate(`/banking-payment/${data.order._id}`);
+          } else {
+            navigate(`/order/${data.order._id}`);
+          }
         }, 1000);
       } else {
         showToast(data.message || "Đặt hàng thất bại", "error");
       }
     } catch (err) {
-      showToast(
-        err.response?.data?.message || "Đặt hàng thất bại",
-        "error"
-      );
+      showToast(err.response?.data?.message || "Đặt hàng thất bại", "error");
     } finally {
       setIsLoading(false);
     }
@@ -266,9 +281,7 @@ const Checkout = () => {
                   <TextField
                     label="Ghi chú đơn hàng (tuỳ chọn)"
                     value={form.note}
-                    onChange={(e) =>
-                      setForm({ ...form, note: e.target.value })
-                    }
+                    onChange={(e) => setForm({ ...form, note: e.target.value })}
                     fullWidth
                     multiline
                     rows={2}
@@ -278,12 +291,10 @@ const Checkout = () => {
 
                 <div className="card border p-4">
                   <h5 className="mb-3 fw-bold">Phương thức thanh toán</h5>
-                  <div className="d-flex gap-3">
+                  <div className="d-flex gap-3 flex-wrap">
                     <div
                       className={`paymentOption ${form.paymentMethod === "cod" ? "active" : ""}`}
-                      onClick={() =>
-                        setForm({ ...form, paymentMethod: "cod" })
-                      }
+                      onClick={() => setForm({ ...form, paymentMethod: "cod" })}
                     >
                       <span className="paymentIcon">💵</span>
                       <span>Thanh toán khi nhận hàng (COD)</span>
@@ -297,7 +308,34 @@ const Checkout = () => {
                       <span className="paymentIcon">🏦</span>
                       <span>Chuyển khoản ngân hàng</span>
                     </div>
+                    <div
+                      className={`paymentOption ${form.paymentMethod === "momo" ? "active" : ""}`}
+                      onClick={() =>
+                        setForm({ ...form, paymentMethod: "momo" })
+                      }
+                    >
+                      <span className="paymentIcon">
+                        <img
+                          src="https://developers.momo.vn/v3/assets/images/primary-momo-40dc0e4855e7b12209de4658e30d8bdf.png"
+                          alt="MoMo"
+                          style={{
+                            width: 28,
+                            height: 28,
+                            objectFit: "contain",
+                          }}
+                        />
+                      </span>
+                      <span>Ví MoMo</span>
+                    </div>
                   </div>
+                  {form.paymentMethod === "momo" && (
+                    <div className="bankingInfo mt-3 p-3">
+                      <p className="mb-0 text-light" style={{ fontSize: 13 }}>
+                        Bạn sẽ được chuyển đến trang thanh toán MoMo sau khi đặt
+                        hàng. Vui lòng hoàn tất thanh toán trên ứng dụng MoMo.
+                      </p>
+                    </div>
+                  )}
                   {form.paymentMethod === "banking" && (
                     <div className="bankingInfo mt-3 p-3">
                       <p className="mb-1">

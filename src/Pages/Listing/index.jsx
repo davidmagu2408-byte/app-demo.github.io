@@ -26,11 +26,11 @@ const Listing = () => {
   const categoryData = context.categoryData;
   const subcategoryData = context.subcategoryData;
   const currentCat = categoryData?.category?.find(
-    (c) => c._id === id || c.id === id
+    (c) => c._id === id || c.id === id,
   );
   const currentSubCat = subCatId
     ? subcategoryData?.subCategory?.find(
-        (s) => s._id === subCatId || s.id === subCatId
+        (s) => s._id === subCatId || s.id === subCatId,
       )
     : null;
 
@@ -40,20 +40,25 @@ const Listing = () => {
     const endpoint = subCatId
       ? `/product/subcategory/${subCatId}`
       : `/product/category/${id}`;
-    fetchDataFromAPI(endpoint).then((data) => {
-      if (data?.success) {
-        setProducts(data.products);
-      } else {
+    fetchDataFromAPI(endpoint)
+      .then((data) => {
+        if (data?.success) {
+          setProducts(data.products);
+        } else {
+          setProducts([]);
+        }
+        setLoading(false);
+      })
+      .catch(() => {
         setProducts([]);
-      }
-      setLoading(false);
-    });
+        setLoading(false);
+      });
   }, [id, subCatId]);
 
   const totalPages = Math.max(1, Math.ceil(products.length / perPage));
   const paginatedProducts = products.slice(
     (page - 1) * perPage,
-    page * perPage
+    page * perPage,
   );
 
   return (
@@ -61,10 +66,7 @@ const Listing = () => {
       <section className="product_Listing_Page">
         <div className="container">
           <div className="productListing d-flex">
-            <SideBar
-              categoryId={id}
-              subCatId={subCatId}
-            />
+            <SideBar categoryId={id} subCatId={subCatId} />
             <div className="content_right">
               <div className="showBy mt-0 mb-3 d-flex align-items-center">
                 <div className="d-flex align-items-center btnWrapper">

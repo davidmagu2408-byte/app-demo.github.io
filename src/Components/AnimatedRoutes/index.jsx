@@ -9,6 +9,8 @@ import Orders from "../../Pages/Orders";
 import OrderDetails from "../../Pages/OrderDetails";
 import SignIn from "../../Pages/SignIn";
 import SignUp from "../../Pages/SignUp";
+import PaymentResult from "../../Pages/PaymentResult";
+import BankingPayment from "../../Pages/BankingPayment";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -31,6 +33,16 @@ const AnimatedRoutes = () => {
         <Route path="/checkout" exact={true} element={<Checkout />} />
         <Route path="/orders" exact={true} element={<Orders />} />
         <Route path="/order/:id" exact={true} element={<OrderDetails />} />
+        <Route
+          path="/banking-payment/:id"
+          exact={true}
+          element={<BankingPayment />}
+        />
+        <Route
+          path="/payment-result"
+          exact={true}
+          element={<PaymentResult />}
+        />
         <Route path="/login" exact={true} element={<SignIn />} />
         <Route path="/signUp" exact={true} element={<SignUp />} />
       </Routes>

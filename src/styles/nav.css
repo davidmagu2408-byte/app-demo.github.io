@@ -1,0 +1,202 @@
+/* Navbar */
+nav {
+    background: #2bbef9;
+    padding: 10px 0;
+    position: relative;
+    z-index: 999;
+}
+
+nav .navPart1 {
+    max-width: 20%;
+    flex: 0 0 20%;
+}
+
+nav .navPart1 .catWrapper {
+    position: relative;
+    z-index: 100;
+}
+
+nav .navPart1 .catWrapper .sidebarNav {
+    width: 100%;
+    height: auto;
+    background: #fff;
+    position: absolute;
+    top: 110%;
+    left: 0px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(8px);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+nav .navPart1 .catWrapper .open {
+    height: auto;
+    opacity: 1;
+    visibility: inherit;
+    transform: translateY(0);
+}
+
+nav .navPart1 .catWrapper .sidebarNav ul li {
+    width: 100%;
+    list-style: none;
+    padding: 5px 0px;
+}
+
+nav .navPart1 .catWrapper .sidebarNav ul li button {
+    color: #000;
+    width: 100%;
+    justify-content: flex-start;
+    text-transform: capitalize !important;
+}
+
+nav .navPart1 .catWrapper .sidebarNav ul li button svg {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+nav .navPart1 .catWrapper .sidebarNav ul li button:hover {
+    background: transparent !important;
+}
+
+nav .navPart1 .catWrapper .sidebarNav ul li {
+    position: static;
+}
+
+nav .navPart1 .catWrapper .sidebarNav ul li .submenu {
+    position: absolute;
+    top: 0px;
+    left: 101%;
+    width: 250px;
+    height: auto;
+    background: #fff;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    transform: translateX(8px);
+}
+
+nav .navPart1 .catWrapper .sidebarNav ul li:hover .submenu {
+    opacity: 1;
+    visibility: inherit;
+    left: 101%;
+    padding: 0px;
+    transform: translateX(0);
+}
+
+nav .navPart1 .catWrapper .sidebarNav ul li:hover .submenu button {
+    border-radius: 0px !important;
+}
+
+nav .navPart2 {
+    max-width: 80%;
+    flex: 0 0 80%;
+}
+
+nav .AllCateTab {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 20px !important;
+    border-radius: 30px !important;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+nav .AllCateTab * {
+    color: #fff;
+}
+
+nav .AllCateTab:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+nav .AllCateTab .text {
+    font-weight: 600;
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+nav .AllCateTab .icon1 svg {
+    font-size: 22px !important;
+    padding-right: 10px;
+}
+
+nav .AllCateTab .icon2 svg {
+    font-size: 18px !important;
+    padding-left: 10px;
+}
+
+nav .navPart2 ul {
+    margin-bottom: 0px;
+}
+
+nav .navPart2 ul li a {
+    text-decoration: none;
+}
+
+nav .navPart2 ul li a button {
+    font-size: 14px !important;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    border-radius: 25px;
+    position: relative;
+}
+
+nav .navPart2 ul li a svg {
+    font-size: 20px;
+}
+
+nav .navPart2 ul li button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+nav .navPart2 ul li {
+    position: relative;
+}
+
+nav .navPart2 ul li .submenu {
+    position: absolute;
+    top: 150%;
+    left: 0px;
+    min-width: 200px;
+    background: #fff;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 100;
+    transform: translateY(8px);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+nav .navPart2 ul li .submenu a {
+    display: block;
+    width: 100%;
+}
+
+nav .navPart2 ul li .submenu a button {
+    width: 100%;
+    justify-content: flex-start !important;
+    border-radius: 0px !important;
+    text-transform: capitalize !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+}
+
+nav .navPart2 ul li:hover .submenu {
+    opacity: 1;
+    visibility: inherit;
+    top: 100%;
+    transform: translateY(0);
+}

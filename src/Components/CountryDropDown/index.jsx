@@ -76,7 +76,7 @@ const CountryDropDown = () => {
           </div>
           <ul className="countryList mt-3">
             {countryList &&
-              countryList.lenght !== 0 &&
+              countryList.length !== 0 &&
               countryList?.map((item, index) => {
                 return (
                   <li key={index}>

@@ -1,0 +1,197 @@
+/* ============= Orders Page ============= */
+.ordersPage {
+    padding: 30px 0;
+    min-height: 60vh;
+}
+
+.orderTable {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.orderTable thead {
+    background: #f8f9fa;
+}
+
+.orderTable th {
+    font-weight: 700;
+    font-size: 14px;
+    padding: 14px 16px;
+    white-space: nowrap;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.orderTable td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.orderTable tbody tr {
+    transition: background 0.2s ease;
+}
+
+.orderTable tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.orderId {
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 13px;
+    color: #1976d2;
+}
+
+.orderThumb {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid #eee;
+}
+
+.statusBadge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.viewDetailBtn {
+    min-width: 38px !important;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px !important;
+    padding: 0 !important;
+    font-size: 20px;
+    color: #1976d2 !important;
+    border: 1px solid #e0e0e0 !important;
+    transition: all 0.2s ease;
+}
+
+.viewDetailBtn:hover {
+    background: #1976d2 !important;
+    color: #fff !important;
+    border-color: #1976d2 !important;
+}
+
+/* ============= Order Detail Page ============= */
+.orderDetailPage {
+    padding: 30px 0;
+    min-height: 60vh;
+}
+
+.orderCard {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.orderCard h5 {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.orderItemImg {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid #eee;
+    transition: transform 0.2s ease;
+}
+
+.orderItemImg:hover {
+    transform: scale(1.08);
+}
+
+.orderItemName:hover {
+    color: #1976d2;
+}
+
+/* Order Timeline */
+.orderTimeline {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 4px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.timelineStep {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+}
+
+.timelineIcon {
+    font-size: 28px;
+    margin-bottom: 8px;
+    opacity: 0.35;
+    transition: all 0.3s ease;
+}
+
+.timelineStep.done .timelineIcon {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.timelineStep.current .timelineIcon {
+    animation: pulse 1.5s ease infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1.15);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+}
+
+.timelineBar {
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.timelineFill {
+    height: 100%;
+    background: #4caf50;
+    border-radius: 2px;
+    transition: width 0.5s ease;
+}
+
+.timelineLabel {
+    font-size: 12px;
+    font-weight: 600;
+    color: #999;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.timelineStep.done .timelineLabel {
+    color: #333;
+}
+
+.timelineStep.current .timelineLabel {
+    color: #1976d2;
+}

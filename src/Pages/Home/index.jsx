@@ -15,7 +15,9 @@ const Home = () => {
   const [userProfile, setUserProfile] = useState([]);
   const month = new Date().getMonth() + 1;
   useEffect(() => {
-    fetchDataFromAPI("/product/featured").then((data) => setProductData(data));
+    fetchDataFromAPI("/product/featured")
+      .then((data) => setProductData(data))
+      .catch(() => setProductData([]));
   }, []);
   return (
     <>

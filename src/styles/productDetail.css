@@ -1,0 +1,341 @@
+/* Product Modal */
+.productModal .MuiPaper-elevation {
+    max-width: 900px !important;
+    padding: 25px;
+    position: relative;
+    width: 900px !important;
+    animation: scaleIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.productModal h4 {
+    color: #000c !important;
+    font-size: 20px !important;
+}
+
+.productModal .actions button {
+    border: 1px solid #0000001a !important;
+    color: #000 !important;
+    font-size: 10px !important;
+}
+
+.productModal .actions button svg {
+    color: #000 !important;
+    font-size: 15px !important;
+}
+
+.productModal .actions button:hover {
+    background: #f1f1f1;
+    opacity: 1 !important;
+}
+
+.productDetailsModal p {
+    font-size: 14px;
+    line-height: 25px;
+    opacity: 0.8;
+}
+
+/* Product Zoom */
+.productZoom {
+    border-radius: 15px;
+    height: auto;
+    overflow: hidden;
+    padding: 0;
+    width: 100%;
+}
+
+.productZoom .badge {
+    left: 20px;
+    position: absolute;
+    top: 20px;
+    z-index: 100;
+}
+
+.zoomSliderBig {
+    width: 100% !important;
+}
+
+.productZoomBig {
+    overflow: hidden;
+    height: 300px !important;
+    width: 100% !important;
+}
+
+.iiz {
+    width: 100% !important;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    display: block;
+    height: 100% !important;
+}
+
+.iiz__img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.zoomSlider {
+    padding-top: 30px;
+}
+
+.zoomSlider * {
+    outline: none !important;
+}
+
+.zoomSlider .swiper-slide {
+    border: 2px solid #0000 !important;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 70px !important;
+    overflow: hidden;
+}
+
+.zoomSlider .swiper-slide-thumb-active {
+    border: 2px solid #0000004d !important;
+}
+
+.zoomSlider .item img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.zoomSlider .swiper-button-prev {
+    height: 30px !important;
+    left: -3% !important;
+    top: 60% !important;
+    width: 30px !important;
+}
+
+.zoomSlider .swiper-button-next {
+    height: 30px !important;
+    right: -3% !important;
+    top: 60% !important;
+    width: 30px !important;
+}
+
+.zoomSlider .swiper-slide {
+    opacity: 0.5;
+}
+
+.zoomSlider .swiper-slide-thumb-active {
+    opacity: 1 !important;
+}
+
+.info .oldPrice .lg {
+    font-size: 20px;
+}
+
+.info .newPrice .lg {
+    font-size: 20px;
+}
+
+/* Quantity Box */
+.quantityDrop {
+    gap: 10px;
+    width: 150px;
+}
+
+.quantityDrop button {
+    background: #edeef5 !important;
+    border: 1px solid #0000001a !important;
+    border-radius: 50% !important;
+    color: #000;
+    height: 40px !important;
+    min-width: 40px !important;
+    width: 40px !important;
+    transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.quantityDrop button:hover {
+    background: #ccc !important;
+    transform: scale(1.1);
+}
+
+.quantityDrop input {
+    background: #0000;
+    border: 0;
+    outline: none !important;
+    text-align: center;
+    width: 30px;
+}
+
+/* Product Size */
+.productSize {
+    height: auto;
+    padding: 25px 0;
+    width: 100%;
+}
+
+.productSize ul li {
+    margin-right: 10px !important;
+}
+
+.productSize ul li a {
+    align-items: center;
+    border: 1px solid #0000001a;
+    border-radius: 4px !important;
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px !important;
+    justify-content: center;
+    padding: 5px 10px !important;
+    text-decoration: none !important;
+    transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.productSize ul li a:hover {
+    background: #ececec;
+    transform: translateY(-2px);
+}
+
+.productSize ul li a.active {
+    background: #6d4aae !important;
+    color: #fff !important;
+    box-shadow: 0 4px 10px rgba(109, 74, 174, 0.3);
+}
+
+.productSize ul.error li a {
+    border: 1px solid red !important;
+}
+
+/* Product Details Page */
+.productDetails .btn-circle {
+    background: #edeef5 !important;
+    border: 1px solid #0000001a !important;
+    border-radius: 50% !important;
+    color: #000;
+    height: 40px !important;
+    min-width: 40px !important;
+    padding: 5px !important;
+    width: 40px !important;
+}
+
+.productDetails .btn-circle svg {
+    color: #000 !important;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.productDetails .btn-circle:hover {
+    background: #ccc !important;
+}
+
+.productDetails .btn-circle svg.text-danger {
+    color: #ed174a !important;
+    opacity: 1 !important;
+}
+
+.detailsPageTabs {
+    background: #f7f2ff;
+    border-radius: 25px !important;
+}
+
+.customTabs ul li {
+    margin-right: 10px !important;
+}
+
+.customTabs ul li button {
+    border: 1px solid #0003 !important;
+    border-radius: 30px !important;
+    color: #000 !important;
+    font-size: 14px !important;
+    padding: 6px 25px !important;
+    text-transform: capitalize !important;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.customTabs ul li button.active {
+    background: #6d4aae !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(109, 74, 174, 0.3);
+}
+
+.customTabs ul li button:hover:not(.active) {
+    background: #f3f0ff !important;
+    border-color: #6d4aae !important;
+}
+
+.detailsPageTabs .table td,
+.detailsPageTabs .table th {
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.detailsPageTabs .table td p {
+    margin-bottom: 0;
+}
+
+.detailsPageTabs .tabContent h3,
+.reviewForm h4 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Reviews */
+.reviewsCard {
+    margin-bottom: 25px !important;
+}
+
+.reviewsCard .image {
+    width: 100px;
+}
+
+.reviewsCard .rounded-circle {
+    align-items: center;
+    display: flex;
+    height: 100px;
+    justify-content: center;
+    overflow: hidden;
+    width: 100px;
+}
+
+.reviewsCard .rounded-circle img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.reviewsCard .info {
+    width: 85%;
+}
+
+.reviewsCard .info p {
+    font-size: 13px;
+    line-height: 22px;
+}
+
+.reviewForm h4 {
+    margin-bottom: 15px;
+}
+
+.reviewForm .form-group {
+    margin-bottom: 25px;
+}
+
+.reviewForm .form-group .form-control {
+    border-radius: 7px !important;
+    font-size: 16px;
+    height: 50px;
+    outline: none !important;
+    padding-left: 20px;
+}
+
+.reviewForm .form-group textarea.form-control {
+    height: 200px;
+    padding-top: 25px;
+}
+
+.reviewScroll {
+    max-height: 400px;
+    overflow-y: scroll;
+    padding-right: 20px;
+}
+
+.progressBarBox {
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    font-size: 16px;
+}

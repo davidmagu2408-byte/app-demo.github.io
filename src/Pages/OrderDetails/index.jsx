@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { MyContext } from "../../App";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import api from "../../apis/axiosConfig";
 import Button from "@mui/material/Button";
 import toast from "react-hot-toast";
@@ -197,9 +197,14 @@ const OrderDetails = () => {
                 </span>
               </div>
               <hr />
-              <div className="d-flex justify-content-between fw-bold" style={{ fontSize: 18 }}>
+              <div
+                className="d-flex justify-content-between fw-bold"
+                style={{ fontSize: 18 }}
+              >
                 <span>Tổng cộng</span>
-                <span style={{ color: "#d32f2f" }}>{formatVND(order.total)}</span>
+                <span style={{ color: "#d32f2f" }}>
+                  {formatVND(order.total)}
+                </span>
               </div>
             </div>
 
@@ -210,7 +215,9 @@ const OrderDetails = () => {
                 <strong>Phương thức:</strong>{" "}
                 {order.paymentMethod === "cod"
                   ? "💵 Thanh toán khi nhận hàng"
-                  : "🏦 Chuyển khoản ngân hàng"}
+                  : order.paymentMethod === "momo"
+                    ? "📱 Ví MoMo"
+                    : "🏦 Chuyển khoản ngân hàng"}
               </p>
               <p className="mb-0">
                 <strong>Trạng thái:</strong>{" "}
@@ -221,17 +228,25 @@ const OrderDetails = () => {
                       order.paymentStatus === "paid"
                         ? "#4caf50"
                         : order.paymentStatus === "failed"
-                        ? "#f44336"
-                        : "#ff9800",
+                          ? "#f44336"
+                          : "#ff9800",
                   }}
                 >
                   {order.paymentStatus === "paid"
                     ? "Đã thanh toán"
                     : order.paymentStatus === "failed"
-                    ? "Thất bại"
-                    : "Chưa thanh toán"}
+                      ? "Thất bại"
+                      : "Chưa thanh toán"}
                 </span>
               </p>
+              {order.paymentMethod === "banking" &&
+                order.paymentStatus === "pending" && (
+                  <Link to={`/banking-payment/${order._id}`}>
+                    <Button className="btn-blue btn-round mt-3" size="small">
+                      Xem thông tin chuyển khoản
+                    </Button>
+                  </Link>
+                )}
             </div>
 
             {/* Shipping address */}
@@ -258,8 +273,7 @@ const OrderDetails = () => {
             {/* Date */}
             <div className="orderCard mb-3">
               <p className="mb-0 text-light" style={{ fontSize: 13 }}>
-                Ngày đặt:{" "}
-                {new Date(order.dateCreated).toLocaleString("vi-VN")}
+                Ngày đặt: {new Date(order.dateCreated).toLocaleString("vi-VN")}
               </p>
             </div>
 

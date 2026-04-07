@@ -62,29 +62,43 @@ const Header = () => {
                 </Link>
               </div>
               <div className="col-sm-10 d-flex align-items-center part2">
-                {context.countryList && context.countryList.lenght !== 0 && (
+                {context.countryList && context.countryList.length !== 0 && (
                   <CountryDropDown />
                 )}
                 <SearchBox />
                 <div className="part3 d-flex align-items-center">
                   {context.user ? (
                     <>
-                      <Button className="circle userBtn" onClick={handleUserClick}>
+                      <Button
+                        className="circle userBtn"
+                        onClick={handleUserClick}
+                      >
                         <FiUser />
                       </Button>
                       <Menu
                         anchorEl={anchorEl}
                         open={open}
                         onClose={handleClose}
-                        transformOrigin={{ horizontal: "right", vertical: "top" }}
-                        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                        transformOrigin={{
+                          horizontal: "right",
+                          vertical: "top",
+                        }}
+                        anchorOrigin={{
+                          horizontal: "right",
+                          vertical: "bottom",
+                        }}
                       >
                         <MenuItem disabled>
                           <span style={{ fontWeight: 600 }}>
                             {context.user.name}
                           </span>
                         </MenuItem>
-                        <MenuItem onClick={() => { handleClose(); navigate("/orders"); }}>
+                        <MenuItem
+                          onClick={() => {
+                            handleClose();
+                            navigate("/orders");
+                          }}
+                        >
                           <ListItemIcon>
                             <IoReceiptOutline size={20} />
                           </ListItemIcon>
@@ -107,7 +121,12 @@ const Header = () => {
                   )}
                   <div className="ml-auto cartTab d-flex align-items-center">
                     <span className="price">
-                      {(context.cartData || []).reduce((s, i) => s + i.price * i.quantity, 0).toLocaleString("vi-VN", { style: "currency", currency: "VND" })}
+                      {(context.cartData || [])
+                        .reduce((s, i) => s + i.price * i.quantity, 0)
+                        .toLocaleString("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        })}
                     </span>
                     <div className="position-relative">
                       <Link to="/cart">
@@ -115,7 +134,10 @@ const Header = () => {
                           <IoBagOutline />
                         </Button>
                         <span className="count d-flex align-items-center justify-content-center">
-                          {(context.cartData || []).reduce((s, i) => s + i.quantity, 0)}
+                          {(context.cartData || []).reduce(
+                            (s, i) => s + i.quantity,
+                            0,
+                          )}
                         </span>
                       </Link>
                     </div>

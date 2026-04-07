@@ -1,0 +1,340 @@
+/* Banner */
+.homeBannerSection {
+    position: relative;
+    cursor: pointer;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.homeBannerSection .swiper {
+    overflow: hidden !important;
+    border-radius: 12px !important;
+}
+
+.homeBannerSection .swiper .item {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+}
+
+.homeBannerSection .swiper .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Navigation arrows */
+.homeBannerSection .swiper .swiper-button-next,
+.homeBannerSection .swiper .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.homeBannerSection .swiper .swiper-button-next::after,
+.homeBannerSection .swiper .swiper-button-prev::after {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+}
+
+.homeBannerSection .swiper:hover .swiper-button-next,
+.homeBannerSection .swiper:hover .swiper-button-prev {
+    opacity: 1;
+}
+
+.homeBannerSection .swiper .swiper-button-next:hover,
+.homeBannerSection .swiper .swiper-button-prev:hover {
+    background: #fff;
+    transform: scale(1.1);
+}
+
+/* Pagination dots */
+.homeBannerSection .swiper .swiper-pagination {
+    bottom: 16px !important;
+}
+
+.homeBannerSection .swiper .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.6);
+    opacity: 1;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.homeBannerSection .swiper .swiper-pagination-bullet-active {
+    background: #fff;
+    width: 28px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.homeBannerSection * {
+    outline: none !important;
+}
+
+/* Home Products */
+.homeProducts {
+    padding: 25px 0px;
+    width: 100%;
+}
+
+.homeProducts .banner {
+    width: 100%;
+    border-radius: 7px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.homeProducts .banner:hover {
+    transform: scale(1.02);
+}
+
+.productRow .hd {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.viewAllBtn {
+    padding: 5px 15px !important;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+    border-radius: 30px !important;
+    color: #000 !important;
+    font-weight: 600;
+    text-transform: capitalize !important;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.viewAllBtn:hover {
+    background: #6d4aae !important;
+    color: #fff !important;
+    border-color: #6d4aae !important;
+    transform: translateX(4px);
+}
+
+/* Home Categories */
+.homeCate {
+    padding: 25px 0;
+}
+
+.homeCate .info2 {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 0px;
+    font-style: oblique;
+}
+
+.homeCate .swiper {
+    overflow: inherit !important;
+}
+
+.homeCate .swiper .swiper-wrapper {
+    justify-content: space-around;
+}
+
+.homeCate .swiper .swiper-slide {
+    width: 150px !important;
+}
+
+.homeCate .swiper .item {
+    align-items: center;
+    border: 1px solid #0000001a;
+    border-radius: 100%;
+    display: flex;
+    height: 120px;
+    justify-content: center;
+    margin: auto;
+    overflow: hidden;
+    padding: 0;
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    width: 120px;
+}
+
+@keyframes mover {
+    0% {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-5px);
+    }
+}
+
+.homeCate .swiper .item:hover img {
+    animation: mover 0.7s infinite alternate;
+}
+
+.homeCate .swiper .item img {
+    background-size: cover;
+    width: 60%;
+}
+
+.homeCate .swiper .swiper-slide h6 {
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    opacity: 0.8;
+    padding-top: 10px;
+    text-align: center;
+    text-transform: capitalize;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.homeCate .swiper .item:hover {
+    background: #ccc;
+    box-shadow:
+        0 8px 20px #00000020,
+        0 4px 8px #0000001a;
+    transform: translateY(-5px) scale(1.05);
+}
+
+.homeCate .swiper-button-next,
+.homeCate .swiper-button-prev {
+    height: 30px !important;
+    top: -30px !important;
+    width: 30px !important;
+}
+
+.homeCate .swiper-button-prev {
+    left: inherit !important;
+    right: 30px !important;
+}
+
+.homeCate .swiper-button-next {
+    right: -10px !important;
+}
+
+/* General Swiper buttons */
+.swiper {
+    padding-right: 1px !important;
+}
+
+.swiper-button-next {
+    right: 3% !important;
+}
+
+.swiper-button-prev {
+    left: 3% !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    align-items: center;
+    background: #fff;
+    border-radius: 100%;
+    box-shadow:
+        0 1px 3px #0000001f,
+        0 1px 2px #0000003d !important;
+    display: flex;
+    font-family: FontAwesome !important;
+    font-weight: 700;
+    height: 45px !important;
+    justify-content: center;
+    position: absolute;
+    top: 45%;
+    width: 45px !important;
+    z-index: 100;
+}
+
+.swiper-button-next svg,
+.swiper-button-prev svg {
+    width: 10px !important;
+    color: #000 !important;
+    opacity: 0.6;
+}
+
+/* Newsletter */
+.newsLetterSection {
+    background-image: linear-gradient(to bottom right, #4a2888, #7a55c1);
+    height: auto;
+    overflow: hidden;
+    padding: 60px 0;
+    position: relative;
+    width: 100%;
+}
+
+.newsLetterSection .col-md-6 {
+    position: static !important;
+}
+
+.newsLetterSection p {
+    font-size: 18px;
+    margin: 10px 0 !important;
+}
+
+.newsLetterSection h3 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.newsLetterSection p.text-light {
+    color: #fff !important;
+    font-size: 15px;
+    opacity: 0.7;
+}
+
+.newsLetterSection img {
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    width: 500px;
+}
+
+.newsLetterSection form {
+    background: #fff;
+    border-radius: 5px;
+    height: 60px;
+    padding: 10px;
+    position: relative;
+    width: 80%;
+}
+
+.newsLetterSection form svg {
+    font-size: 25px;
+    left: 10px;
+    opacity: 0.3;
+    position: absolute;
+    top: 17px;
+}
+
+.newsLetterSection form input {
+    background: #fff !important;
+    border: 0 !important;
+    height: 100%;
+    outline: none !important;
+    padding-left: 40px;
+    padding-right: 200px;
+    width: 100%;
+}
+
+.newsLetterSection form button {
+    background: #6d4aae !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    padding: 12px 25px !important;
+    position: absolute;
+    right: 7px;
+    text-transform: capitalize !important;
+    top: 6px;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.newsLetterSection form button:hover {
+    background: #5a3a94 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(109, 74, 174, 0.4);
+}

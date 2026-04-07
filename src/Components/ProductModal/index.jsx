@@ -22,7 +22,6 @@ const ProductModal = () => {
     fetchProductById(id).then((data) => setProduct(data));
     setQty(1);
   }, []);
-  console.log("data", product);
 
   if (!product.data) return null;
 
@@ -49,7 +48,7 @@ const ProductModal = () => {
           <div className="d-flex align-items-center me-4">
             <span>Nhãn hàng:</span>
             <span className="ms-2">
-              <b>{product.data.brand.name}</b>
+              <b>{product.data.brand?.name}</b>
             </span>
           </div>
           <Rating
@@ -115,7 +114,11 @@ const ProductModal = () => {
                 </Button>
               ) : (
                 <>
-                  <QuantityBox value={qty} onChange={setQty} max={product.data.countInStock} />
+                  <QuantityBox
+                    value={qty}
+                    onChange={setQty}
+                    max={product.data.countInStock}
+                  />
                   <Button
                     className="btn-blue btn-lg btn-big btn-round"
                     onClick={() => {

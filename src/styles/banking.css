@@ -1,0 +1,82 @@
+/* Banking Payment Page */
+.bankingPaymentPage {
+    padding: 40px 0;
+    min-height: 60vh;
+}
+
+.bankingPaymentCard {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.qrCodeWrapper {
+    display: inline-block;
+    padding: 12px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+}
+
+.qrCodeImg {
+    width: 280px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.bankingDetails {
+    max-width: 450px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.bankingDetailRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.bankingDetailRow.highlight {
+    background: #e3f2fd;
+    border-radius: 8px;
+    border-bottom: none;
+    margin-top: 4px;
+}
+
+.bankingLabel {
+    font-size: 14px;
+    color: #888;
+    flex-shrink: 0;
+}
+
+.bankingValue {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.bankingValueCopy {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.copyBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    color: #888;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.copyBtn:hover {
+    background: #f0f0f0;
+    color: #333;
+}

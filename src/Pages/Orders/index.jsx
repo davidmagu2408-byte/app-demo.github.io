@@ -5,6 +5,7 @@ import api from "../../apis/axiosConfig";
 import Button from "@mui/material/Button";
 import Pagination from "@mui/material/Pagination";
 import { IoEyeOutline } from "react-icons/io5";
+import toast from "react-hot-toast";
 
 const formatVND = (n) =>
   n?.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
@@ -49,7 +50,7 @@ const Orders = () => {
         setPage(data.page);
       }
     } catch (_) {
-      // silent
+      toast.error("Không thể tải danh sách đơn hàng");
     } finally {
       setLoading(false);
     }
@@ -102,7 +103,7 @@ const Orders = () => {
                         </td>
                         <td>
                           {new Date(order.dateCreated).toLocaleDateString(
-                            "vi-VN"
+                            "vi-VN",
                           )}
                         </td>
                         <td>
@@ -116,7 +117,10 @@ const Orders = () => {
                               />
                             ))}
                             {order.items.length > 3 && (
-                              <span className="text-light" style={{ fontSize: 12 }}>
+                              <span
+                                className="text-light"
+                                style={{ fontSize: 12 }}
+                              >
                                 +{order.items.length - 3}
                               </span>
                             )}

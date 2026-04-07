@@ -28,22 +28,28 @@ const ProductDetails = () => {
   useEffect(() => {
     setLoading(true);
     setQty(1);
-    fetchDataFromAPI(`/product/${id}`).then((data) => {
-      if (data.success) {
-        setProduct(data.product);
-        // Fetch related products by same category
-        fetchDataFromAPI(
-          `/product/category/${data.product.category._id || data.product.category}`
-        ).then((catData) => {
-          if (catData.success) {
-            setRelatedProducts(
-              catData.products.filter((p) => p._id !== id).slice(0, 8)
-            );
-          }
-        });
-      }
-      setLoading(false);
-    });
+    fetchDataFromAPI(`/product/${id}`)
+      .then((data) => {
+        if (data.success) {
+          setProduct(data.product);
+          // Fetch related products by same category
+          fetchDataFromAPI(
+            `/product/category/${data.product.category._id || data.product.category}`,
+          )
+            .then((catData) => {
+              if (catData.success) {
+                setRelatedProducts(
+                  catData.products.filter((p) => p._id !== id).slice(0, 8),
+                );
+              }
+            })
+            .catch(() => {});
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   }, [id]);
 
   if (loading) {
@@ -81,10 +87,7 @@ const ProductDetails = () => {
         <div className="row">
           {/* Product images */}
           <div className="col-md-4 ps-5 part1">
-            <ProductZoom
-              value={product.images}
-              discount={product.discount}
-            />
+            <ProductZoom value={product.images} discount={product.discount} />
           </div>
 
           {/* Product info */}
@@ -136,13 +139,17 @@ const ProductDetails = () => {
             {product.category?.name && (
               <div className="d-flex align-items-center mb-2">
                 <span className="text-light me-2">Danh mục:</span>
-                <span><b>{product.category.name}</b></span>
+                <span>
+                  <b>{product.category.name}</b>
+                </span>
               </div>
             )}
             {product.subcategory?.name && (
               <div className="d-flex align-items-center mb-2">
                 <span className="text-light me-2">Danh mục phụ:</span>
-                <span><b>{product.subcategory.name}</b></span>
+                <span>
+                  <b>{product.subcategory.name}</b>
+                </span>
               </div>
             )}
 
