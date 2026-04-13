@@ -1,0 +1,41 @@
+/* ============= Profile Page ============= */
+.profilePage {
+    padding: 30px 0;
+    min-height: 60vh;
+}
+
+.profilePage .card {
+    border-radius: 12px !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+.profilePage .card h5 {
+    font-size: 18px;
+    border-bottom: 2px solid #f1f1f1;
+    padding-bottom: 12px;
+}
+
+.profileAvatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #e3f2fd;
+    font-size: 32px;
+    font-weight: 700;
+    color: #1976d2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+}
+
+.profileInfoText {
+    font-size: 14px;
+    color: #999;
+}
+
+.profilePasswordHint {
+    font-weight: 400;
+    font-size: 13px;
+}

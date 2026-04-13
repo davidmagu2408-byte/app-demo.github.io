@@ -9,9 +9,11 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MyContext } from "../../App";
 import { fetchDataFromAPI } from "../../apis/api";
+import api from "../../apis/axiosConfig";
 import toast from "react-hot-toast";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import TextField from "@mui/material/TextField";
 
 const formatVND = (n) =>
   n?.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
@@ -24,6 +26,10 @@ const ProductDetails = () => {
   const [activeTabs, setactiveTabs] = useState(0);
   const [qty, setQty] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [reviews, setReviews] = useState([]);
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewComment, setReviewComment] = useState("");
+  const [reviewLoading, setReviewLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -50,6 +56,11 @@ const ProductDetails = () => {
       .catch(() => {
         setLoading(false);
       });
+    fetchDataFromAPI(`/product/${id}/reviews`)
+      .then((data) => {
+        if (data?.success) setReviews(data.reviews || []);
+      })
+      .catch(() => {});
   }, [id]);
 
   if (loading) {
@@ -71,6 +82,42 @@ const ProductDetails = () => {
       </section>
     );
   }
+
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
+    if (!context.user) {
+      toast.error("Vui lòng đăng nhập để đánh giá");
+      return;
+    }
+    if (!reviewComment.trim()) {
+      toast.error("Vui lòng nhập nội dung đánh giá");
+      return;
+    }
+    setReviewLoading(true);
+    try {
+      const { data } = await api.post(`/product/${id}/review`, {
+        rating: reviewRating,
+        comment: reviewComment.trim(),
+      });
+      if (data.success) {
+        toast.success(data.message);
+        setReviews(data.reviews);
+        setProduct((prev) => ({
+          ...prev,
+          rating: data.rating,
+          numReviews: data.numReviews,
+        }));
+        setReviewComment("");
+        setReviewRating(5);
+      } else {
+        toast.error(data.message || "Không thể gửi đánh giá");
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Không thể gửi đánh giá");
+    } finally {
+      setReviewLoading(false);
+    }
+  };
 
   const handleAddToCart = () => {
     if (!context.user) {
@@ -264,7 +311,72 @@ const ProductDetails = () => {
               )}
               {activeTabs === 2 && (
                 <div className="tabContent">
-                  <p className="text-light">Chưa có đánh giá nào.</p>
+                  {/* Review form */}
+                  {context.user ? (
+                    <div className="reviewFormBox">
+                      <h6 className="fw-bold mb-2">Viết đánh giá của bạn</h6>
+                      <form onSubmit={handleSubmitReview}>
+                        <div className="d-flex align-items-center mb-2">
+                          <span className="me-2">Đánh giá:</span>
+                          <Rating
+                            value={reviewRating}
+                            onChange={(_, val) => val && setReviewRating(val)}
+                            precision={1}
+                          />
+                        </div>
+                        <TextField
+                          value={reviewComment}
+                          onChange={(e) => setReviewComment(e.target.value)}
+                          placeholder="Nhập nhận xét của bạn..."
+                          fullWidth
+                          multiline
+                          rows={3}
+                          size="small"
+                          inputProps={{ maxLength: 1000 }}
+                          className="mb-2"
+                        />
+                        <Button
+                          type="submit"
+                          className="btn-blue btn-sm"
+                          variant="contained"
+                          disabled={reviewLoading}
+                        >
+                          {reviewLoading ? "Đang gửi..." : "Gửi đánh giá"}
+                        </Button>
+                      </form>
+                    </div>
+                  ) : (
+                    <p className="text-light mb-3">
+                      Vui lòng đăng nhập để viết đánh giá.
+                    </p>
+                  )}
+
+                  {/* Review list */}
+                  {reviews.length === 0 ? (
+                    <p className="text-light">Chưa có đánh giá nào.</p>
+                  ) : (
+                    <div className="reviewList">
+                      {reviews.map((r, idx) => (
+                        <div key={idx} className="reviewItem">
+                          <div className="d-flex align-items-center mb-1">
+                            <strong className="me-2">{r.userName}</strong>
+                            <Rating
+                              value={r.rating}
+                              readOnly
+                              size="small"
+                              precision={1}
+                            />
+                            <span className="reviewDate ms-2">
+                              {new Date(r.dateCreated).toLocaleDateString(
+                                "vi-VN",
+                              )}
+                            </span>
+                          </div>
+                          <p className="mb-0">{r.comment}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
             </div>

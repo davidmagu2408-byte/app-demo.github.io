@@ -1,0 +1,29 @@
+/* ============= Search Page ============= */
+.searchPage {
+    padding: 30px 0;
+    min-height: 60vh;
+}
+
+.searchPage .hd {
+    font-size: 22px;
+}
+
+.searchPage .searchResultCount {
+    font-size: 14px;
+    color: #999;
+}
+
+.searchPage .searchEmpty {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.searchPage .searchEmpty h5 {
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.searchPage .searchEmpty p {
+    color: #999;
+    font-size: 14px;
+}

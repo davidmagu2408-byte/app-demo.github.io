@@ -4,7 +4,11 @@ import CountryDropDown from "../CountryDropDown";
 import Button from "@mui/material/Button";
 import { IoBagOutline } from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
-import { IoLogOutOutline, IoReceiptOutline } from "react-icons/io5";
+import {
+  IoLogOutOutline,
+  IoReceiptOutline,
+  IoPersonOutline,
+} from "react-icons/io5";
 import SearchBox from "./SearchBox";
 import Navigation from "./Navigation";
 import { useContext, useState } from "react";
@@ -89,9 +93,20 @@ const Header = () => {
                         }}
                       >
                         <MenuItem disabled>
-                          <span style={{ fontWeight: 600 }}>
+                          <span className="fw-bold">
                             {context.user.name}
                           </span>
+                        </MenuItem>
+                        <MenuItem
+                          onClick={() => {
+                            handleClose();
+                            navigate("/profile");
+                          }}
+                        >
+                          <ListItemIcon>
+                            <IoPersonOutline size={20} />
+                          </ListItemIcon>
+                          Tài khoản
                         </MenuItem>
                         <MenuItem
                           onClick={() => {

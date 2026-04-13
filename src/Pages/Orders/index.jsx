@@ -117,10 +117,7 @@ const Orders = () => {
                               />
                             ))}
                             {order.items.length > 3 && (
-                              <span
-                                className="text-light"
-                                style={{ fontSize: 12 }}
-                              >
+                              <span className="orderListDate">
                                 +{order.items.length - 3}
                               </span>
                             )}

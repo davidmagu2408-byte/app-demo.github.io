@@ -11,6 +11,8 @@ import SignIn from "../../Pages/SignIn";
 import SignUp from "../../Pages/SignUp";
 import PaymentResult from "../../Pages/PaymentResult";
 import BankingPayment from "../../Pages/BankingPayment";
+import Search from "../../Pages/Search";
+import Profile from "../../Pages/Profile";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -45,6 +47,8 @@ const AnimatedRoutes = () => {
         />
         <Route path="/login" exact={true} element={<SignIn />} />
         <Route path="/signUp" exact={true} element={<SignUp />} />
+        <Route path="/search" exact={true} element={<Search />} />
+        <Route path="/profile" exact={true} element={<Profile />} />
       </Routes>
     </div>
   );

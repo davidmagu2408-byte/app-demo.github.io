@@ -8,6 +8,8 @@ import { postData } from "../../apis/api";
 import { useToast } from "../../utils/Toast";
 import { Toast } from "../../utils/Toast";
 import { useNavigate } from "react-router-dom";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../../firebase";
 
 const SignUp = () => {
   const context = useContext(MyContext);
@@ -76,148 +78,180 @@ const SignUp = () => {
     context.setisOpenHeaderFooterShow(false);
   }, []);
 
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const gUser = result.user;
+      const data = await postData("/user/google-login", {
+        email: gUser.email,
+        name: gUser.displayName,
+        photo: gUser.photoURL,
+      });
+      if (data && data.success) {
+        localStorage.setItem("accessToken", data.accessToken);
+        context.setAccessToken(data.accessToken);
+        context.setUser(data.user);
+        showToast("Đăng nhập thành công!", "success");
+        setTimeout(() => {
+          context.setisOpenHeaderFooterShow(true);
+          navigate("/");
+        }, 1000);
+      } else {
+        showToast(data?.message || "Đăng nhập Google thất bại", "error");
+      }
+    } catch (error) {
+      if (error.code !== "auth/popup-closed-by-user") {
+        showToast("Đăng nhập Google thất bại", "error");
+      }
+    }
+  };
+
   return (
     <>
       <Toast />
       <section className="section signInPage">
-      <div className="shape-bottom">
-        <svg
-          width="1921"
-          height="820"
-          viewBox="0 0 1921 820"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0,413.1v406.7h1921V0.5h-0.4l-228.1,598.3c-30,74.235-80.8,130.6-152.5,168.6c-107.6,57-212.1,40.7-245.7,34.4 c-22.4-4.2-54.9-13.1-97.5-26.6L0,400.5V413.1z"
-            fill="#007BFF"
-          />
-        </svg>
-      </div>
-      <div className="container">
-        <div className="box card p-3 shadow border-0">
-          <div className="text-center imgSignIn">
-            <img src={Logo} alt="Logo" />
-          </div>
-          <form className="mt-1" onSubmit={handleSignUp}>
-            <h2 className="mb-2">Đăng ký tài khoản</h2>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <TextField
-                    id="standard-basic"
-                    label="Họ và tên"
-                    type="text"
-                    name="name"
-                    variant="standard"
-                    required
-                    className="w-100"
-                    onChange={changeInput}
-                  />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <TextField
-                    id="standard-basic"
-                    label="Số điện thoại"
-                    type="tel"
-                    variant="standard"
-                    name="phone"
-                    placeholder="09xx xxx xxx"
-                    pattern="[0-9]*"
-                    inputMode="numeric"
-                    required
-                    className="w-100"
-                    onChange={changeInput}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="form-group position-relative">
-              <TextField
-                id="standard-basic"
-                label="Địa chỉ email"
-                type="email"
-                name="email"
-                variant="standard"
-                required
-                className="w-100"
-                onChange={changeInput}
-              />
-            </div>
-            <div className="form-group">
-              <TextField
-                id="password"
-                label="Nhập mật khẩu"
-                type="password"
-                name="password"
-                variant="standard"
-                required
-                className="w-100"
-                onChange={changeInput}
-              />
-            </div>
-            <div className="form-group">
-              <TextField
-                id="confirm_password"
-                label="Nhập lại mật khẩu"
-                type="password"
-                variant="standard"
-                name="confirm_password"
-                required
-                helperText={
-                  confirmPassword !== "" &&
-                  formField.password !== confirmPassword
-                    ? "Mật khẩu không khớp"
-                    : ""
-                }
-                error={
-                  confirmPassword !== "" &&
-                  formField.password !== confirmPassword
-                }
-                className="w-100"
-                onChange={handleConfirmPassword}
-              />
-            </div>
-            <div className="d-flex align-items-center mt-3 mb-3">
-              <Button
-                type="submit"
-                disabled={isLoading}
-                className="btn-blue col btn-lg btn-big"
-              >
-                {isLoading ? "Đang xử lý..." : "Đăng ký"}
-              </Button>
-              <Button
-                className="btn-lg btn-big col ms-2"
-                variant="outlined"
-                onClick={() => {
-                  context.setisOpenHeaderFooterShow(true);
-                  navigate("/");
-                }}
-              >
-                Cancel
-              </Button>
-            </div>
-            <p className="txt">
-              Đã có tài khoản?
-              <span
-                className="border-effect ms-1 cursor"
-                onClick={() => navigate("/login")}
-              >
-                Đăng nhập
-              </span>
-            </p>
-            <h6 className="mt-4 text-center font-weight-bold">
-              Or continue with social account
-            </h6>
-            <Button className="loginWithGoogle mt-2" variant="outlined">
-              <FcGoogle className="me-1" />
-              Sign In with Google
-            </Button>
-          </form>
+        <div className="shape-bottom">
+          <svg
+            width="1921"
+            height="820"
+            viewBox="0 0 1921 820"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0,413.1v406.7h1921V0.5h-0.4l-228.1,598.3c-30,74.235-80.8,130.6-152.5,168.6c-107.6,57-212.1,40.7-245.7,34.4 c-22.4-4.2-54.9-13.1-97.5-26.6L0,400.5V413.1z"
+              fill="#007BFF"
+            />
+          </svg>
         </div>
-      </div>
-    </section>
+        <div className="container">
+          <div className="box card p-3 shadow border-0">
+            <div className="text-center imgSignIn">
+              <img src={Logo} alt="Logo" />
+            </div>
+            <form className="mt-1" onSubmit={handleSignUp}>
+              <h2 className="mb-2">Đăng ký tài khoản</h2>
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <TextField
+                      id="standard-basic"
+                      label="Họ và tên"
+                      type="text"
+                      name="name"
+                      variant="standard"
+                      required
+                      className="w-100"
+                      onChange={changeInput}
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <TextField
+                      id="standard-basic"
+                      label="Số điện thoại"
+                      type="tel"
+                      variant="standard"
+                      name="phone"
+                      placeholder="09xx xxx xxx"
+                      pattern="[0-9]*"
+                      inputMode="numeric"
+                      required
+                      className="w-100"
+                      onChange={changeInput}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-group position-relative">
+                <TextField
+                  id="standard-basic"
+                  label="Địa chỉ email"
+                  type="email"
+                  name="email"
+                  variant="standard"
+                  required
+                  className="w-100"
+                  onChange={changeInput}
+                />
+              </div>
+              <div className="form-group">
+                <TextField
+                  id="password"
+                  label="Nhập mật khẩu"
+                  type="password"
+                  name="password"
+                  variant="standard"
+                  required
+                  className="w-100"
+                  onChange={changeInput}
+                />
+              </div>
+              <div className="form-group">
+                <TextField
+                  id="confirm_password"
+                  label="Nhập lại mật khẩu"
+                  type="password"
+                  variant="standard"
+                  name="confirm_password"
+                  required
+                  helperText={
+                    confirmPassword !== "" &&
+                    formField.password !== confirmPassword
+                      ? "Mật khẩu không khớp"
+                      : ""
+                  }
+                  error={
+                    confirmPassword !== "" &&
+                    formField.password !== confirmPassword
+                  }
+                  className="w-100"
+                  onChange={handleConfirmPassword}
+                />
+              </div>
+              <div className="d-flex align-items-center mt-3 mb-3">
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  className="btn-blue col btn-lg btn-big"
+                >
+                  {isLoading ? "Đang xử lý..." : "Đăng ký"}
+                </Button>
+                <Button
+                  className="btn-lg btn-big col ms-2"
+                  variant="outlined"
+                  onClick={() => {
+                    context.setisOpenHeaderFooterShow(true);
+                    navigate("/");
+                  }}
+                >
+                  Cancel
+                </Button>
+              </div>
+              <p className="txt">
+                Đã có tài khoản?
+                <span
+                  className="border-effect ms-1 cursor"
+                  onClick={() => navigate("/login")}
+                >
+                  Đăng nhập
+                </span>
+              </p>
+              <h6 className="mt-4 text-center font-weight-bold">
+                Hoặc tiếp tục với
+              </h6>
+              <Button
+                className="loginWithGoogle mt-2"
+                variant="outlined"
+                onClick={handleGoogleLogin}
+              >
+                <FcGoogle className="me-1" />
+                Đăng nhập với Google
+              </Button>
+            </form>
+          </div>
+        </div>
+      </section>
     </>
   );
 };

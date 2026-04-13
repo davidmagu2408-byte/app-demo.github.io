@@ -16,7 +16,7 @@ const Cart = () => {
 
   const subtotal = cartData.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
   const shippingFee = subtotal >= 500000 ? 0 : 30000;
   const total = subtotal + shippingFee;
@@ -130,10 +130,7 @@ const Cart = () => {
                   </span>
                 </div>
                 {subtotal < 500000 && (
-                  <p
-                    className="text-light"
-                    style={{ fontSize: 12, marginBottom: 10 }}
-                  >
+                  <p className="cartFreeShipHint">
                     Mua thêm{" "}
                     <b className="text-danger">
                       {formatVND(500000 - subtotal)}

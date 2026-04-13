@@ -125,19 +125,7 @@ const OrderDetails = () => {
             })}
           </div>
         ) : (
-          <div
-            className="cancelledBanner mb-4"
-            style={{
-              background: "#fff3f3",
-              border: "1px solid #f44336",
-              borderRadius: 8,
-              padding: "12px 20px",
-              color: "#f44336",
-              fontWeight: 600,
-            }}
-          >
-            ❌ Đơn hàng đã bị huỷ
-          </div>
+          <div className="cancelledBanner mb-4">❌ Đơn hàng đã bị huỷ</div>
         )}
 
         <div className="row">
@@ -153,19 +141,17 @@ const OrderDetails = () => {
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="orderItemImg"
+                    className="orderItemImg orderItemClickable"
                     onClick={() => navigate(`/product/${item.productId}`)}
-                    style={{ cursor: "pointer" }}
                   />
                   <div className="flex-grow-1">
                     <p
-                      className="mb-1 fw-bold orderItemName"
+                      className="mb-1 fw-bold orderItemName orderItemClickable"
                       onClick={() => navigate(`/product/${item.productId}`)}
-                      style={{ cursor: "pointer" }}
                     >
                       {item.name}
                     </p>
-                    <p className="mb-0 text-light" style={{ fontSize: 14 }}>
+                    <p className="mb-0 orderItemSubText">
                       {formatVND(item.price)} × {item.quantity}
                     </p>
                   </div>
@@ -190,19 +176,16 @@ const OrderDetails = () => {
                 <span>Phí vận chuyển</span>
                 <span>
                   {order.shippingFee === 0 ? (
-                    <span style={{ color: "#4caf50" }}>Miễn phí</span>
+                    <span className="freeShipText">Miễn phí</span>
                   ) : (
                     formatVND(order.shippingFee)
                   )}
                 </span>
               </div>
               <hr />
-              <div
-                className="d-flex justify-content-between fw-bold"
-                style={{ fontSize: 18 }}
-              >
+              <div className="d-flex justify-content-between orderTotalRow">
                 <span>Tổng cộng</span>
-                <span style={{ color: "#d32f2f" }}>
+                <span className="orderTotalValue">
                   {formatVND(order.total)}
                 </span>
               </div>
@@ -272,7 +255,7 @@ const OrderDetails = () => {
 
             {/* Date */}
             <div className="orderCard mb-3">
-              <p className="mb-0 text-light" style={{ fontSize: 13 }}>
+              <p className="mb-0 orderDateText">
                 Ngày đặt: {new Date(order.dateCreated).toLocaleString("vi-VN")}
               </p>
             </div>

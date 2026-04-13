@@ -11,6 +11,8 @@ import axios from "axios";
 const formatVND = (n) =>
   n?.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
 
+const PHONE_REGEX = /^0[0-9]{9,10}$/;
+
 const Checkout = () => {
   const context = useContext(MyContext);
   const navigate = useNavigate();
@@ -45,9 +47,10 @@ const Checkout = () => {
       return;
     }
     axios
-      .get("https://provinces.open-api.vn/api/p")
-      .then((res) => setProvinces(res.data));
-  }, []);
+      .get("https://provinces.open-api.vn/api/v2/p")
+      .then((res) => setProvinces(res.data))
+      .catch(() => showToast("Không thể tải danh sách tỉnh/thành", "error"));
+  }, [user, cartData.length, navigate]);
 
   useEffect(() => {
     if (user) {
@@ -71,27 +74,37 @@ const Checkout = () => {
       ward: "",
       wardName: "",
     });
+    setDistricts([]);
     setWards([]);
-    const res = await axios.get(
-      `https://provinces.open-api.vn/api/p/${code}?depth=2`,
-    );
-    setDistricts(res.data.districts || []);
+    try {
+      const res = await axios.get(
+        `https://provinces.open-api.vn/api/v2/p/${code}?depth=2`,
+      );
+      setDistricts(res.data.districts || []);
+    } catch {
+      showToast("Không thể tải danh sách quận/huyện", "error");
+    }
   };
 
   const handleDistrictChange = async (e) => {
     const code = e.target.value;
-    const dist = districts.find((d) => d.code === Number(code));
+    const d = districts.find((d) => d.code === Number(code));
     setForm({
       ...form,
       district: code,
-      districtName: dist?.name || "",
+      districtName: d?.name || "",
       ward: "",
       wardName: "",
     });
-    const res = await axios.get(
-      `https://provinces.open-api.vn/api/d/${code}?depth=2`,
-    );
-    setWards(res.data.wards || []);
+    setWards([]);
+    try {
+      const res = await axios.get(
+        `https://provinces.open-api.vn/api/v2/d/${code}?depth=2`,
+      );
+      setWards(res.data.wards || []);
+    } catch {
+      showToast("Không thể tải danh sách phường/xã", "error");
+    }
   };
 
   const handleWardChange = (e) => {
@@ -120,6 +133,10 @@ const Checkout = () => {
       showToast("Vui lòng điền đầy đủ thông tin giao hàng", "error");
       return;
     }
+    if (!PHONE_REGEX.test(form.phone.trim())) {
+      showToast("Số điện thoại không hợp lệ", "error");
+      return;
+    }
 
     setIsLoading(true);
     try {
@@ -144,6 +161,18 @@ const Checkout = () => {
         // MoMo payment — create order via MoMo endpoint and redirect
         const { data } = await api.post("/momo/create", payload);
         if (data.success && data.payUrl) {
+          try {
+            const payHost = new URL(data.payUrl).hostname;
+            if (!payHost.endsWith("momo.vn")) {
+              showToast("URL thanh toán không hợp lệ", "error");
+              setIsLoading(false);
+              return;
+            }
+          } catch {
+            showToast("URL thanh toán không hợp lệ", "error");
+            setIsLoading(false);
+            return;
+          }
           clearCart();
           window.location.href = data.payUrl;
           return;
@@ -197,6 +226,7 @@ const Checkout = () => {
                         fullWidth
                         required
                         size="small"
+                        inputProps={{ maxLength: 100 }}
                       />
                     </div>
                     <div className="col-md-6 mb-3">
@@ -209,11 +239,12 @@ const Checkout = () => {
                         fullWidth
                         required
                         size="small"
+                        inputProps={{ maxLength: 11 }}
                       />
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col-md-4 mb-3">
+                    <div className="col-md-6 mb-3">
                       <TextField
                         select
                         label="Tỉnh/Thành"
@@ -230,7 +261,7 @@ const Checkout = () => {
                         ))}
                       </TextField>
                     </div>
-                    <div className="col-md-4 mb-3">
+                    <div className="col-md-6 mb-3">
                       <TextField
                         select
                         label="Quận/Huyện"
@@ -248,7 +279,9 @@ const Checkout = () => {
                         ))}
                       </TextField>
                     </div>
-                    <div className="col-md-4 mb-3">
+                  </div>
+                  <div className="row">
+                    <div className="col-md-6 mb-3">
                       <TextField
                         select
                         label="Phường/Xã"
@@ -277,6 +310,7 @@ const Checkout = () => {
                     required
                     size="small"
                     className="mb-3"
+                    inputProps={{ maxLength: 500 }}
                   />
                   <TextField
                     label="Ghi chú đơn hàng (tuỳ chọn)"
@@ -286,6 +320,7 @@ const Checkout = () => {
                     multiline
                     rows={2}
                     size="small"
+                    inputProps={{ maxLength: 500 }}
                   />
                 </div>
 
@@ -318,11 +353,7 @@ const Checkout = () => {
                         <img
                           src="https://developers.momo.vn/v3/assets/images/primary-momo-40dc0e4855e7b12209de4658e30d8bdf.png"
                           alt="MoMo"
-                          style={{
-                            width: 28,
-                            height: 28,
-                            objectFit: "contain",
-                          }}
+                          className="momoIcon"
                         />
                       </span>
                       <span>Ví MoMo</span>
@@ -330,7 +361,7 @@ const Checkout = () => {
                   </div>
                   {form.paymentMethod === "momo" && (
                     <div className="bankingInfo mt-3 p-3">
-                      <p className="mb-0 text-light" style={{ fontSize: 13 }}>
+                      <p className="mb-0 text-light paymentInfoText">
                         Bạn sẽ được chuyển đến trang thanh toán MoMo sau khi đặt
                         hàng. Vui lòng hoàn tất thanh toán trên ứng dụng MoMo.
                       </p>
@@ -347,7 +378,7 @@ const Checkout = () => {
                       <p className="mb-1">
                         <b>Chủ TK:</b> ECOMMERCE WEBSITE
                       </p>
-                      <p className="mb-0 text-light" style={{ fontSize: 13 }}>
+                      <p className="mb-0 text-light paymentInfoText">
                         Nội dung CK: [Họ tên] - [SĐT]
                       </p>
                     </div>
@@ -368,19 +399,9 @@ const Checkout = () => {
                           <img src={item.image} alt={item.name} />
                           <span className="qtyBadge">{item.quantity}</span>
                         </div>
-                        <div className="ms-3" style={{ flex: 1, minWidth: 0 }}>
-                          <p
-                            className="mb-0 fw-bold"
-                            style={{
-                              fontSize: 13,
-                              overflow: "hidden",
-                              textOverflow: "ellipsis",
-                              whiteSpace: "nowrap",
-                            }}
-                          >
-                            {item.name}
-                          </p>
-                          <span style={{ fontSize: 13 }}>
+                        <div className="checkoutItemInfo ms-3">
+                          <p className="checkoutItemName">{item.name}</p>
+                          <span className="checkoutItemPrice">
                             {formatVND(item.price * item.quantity)}
                           </span>
                         </div>
@@ -400,13 +421,8 @@ const Checkout = () => {
                   </div>
                   <hr />
                   <div className="d-flex align-items-center mb-3">
-                    <span className="fw-bold" style={{ fontSize: 16 }}>
-                      Tổng cộng
-                    </span>
-                    <span
-                      className="ms-auto text-red fw-bold"
-                      style={{ fontSize: 18 }}
-                    >
+                    <span className="checkoutTotalLabel">Tổng cộng</span>
+                    <span className="ms-auto text-red checkoutTotalValue">
                       {formatVND(total)}
                     </span>
                   </div>

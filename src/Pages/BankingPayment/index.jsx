@@ -55,7 +55,7 @@ const BankingPayment = () => {
 
   if (loading) {
     return (
-      <section className="section" style={{ minHeight: "60vh" }}>
+      <section className="section bankingPaymentPage">
         <div className="container text-center py-5">
           <CircularProgress size={48} />
           <h4 className="mt-3">Đang tải thông tin thanh toán...</h4>
@@ -198,20 +198,11 @@ const BankingPayment = () => {
                     </div>
                   </div>
 
-                  <div
-                    className="bankingNote mt-4 p-3"
-                    style={{
-                      background: "#fff8e1",
-                      border: "1px solid #ffe082",
-                      borderRadius: 8,
-                      fontSize: 13,
-                      textAlign: "left",
-                    }}
-                  >
+                  <div className="bankingNote mt-4 p-3">
                     <p className="mb-1">
                       <strong>⚠️ Lưu ý:</strong>
                     </p>
-                    <ul className="mb-0" style={{ paddingLeft: 18 }}>
+                    <ul className="mb-0 bankingNoteList">
                       <li>
                         Vui lòng chuyển <b>đúng số tiền</b> và{" "}
                         <b>đúng nội dung</b> chuyển khoản.

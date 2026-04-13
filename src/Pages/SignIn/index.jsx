@@ -8,6 +8,8 @@ import { postData } from "../../apis/api";
 import { useToast } from "../../utils/Toast";
 import { Toast } from "../../utils/Toast";
 import { useNavigate } from "react-router-dom";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../../firebase";
 
 const SignIn = () => {
   const context = useContext(MyContext);
@@ -61,6 +63,34 @@ const SignIn = () => {
   useEffect(() => {
     context.setisOpenHeaderFooterShow(false);
   }, []);
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const gUser = result.user;
+      const data = await postData("/user/google-login", {
+        email: gUser.email,
+        name: gUser.displayName,
+        photo: gUser.photoURL,
+      });
+      if (data && data.success) {
+        localStorage.setItem("accessToken", data.accessToken);
+        context.setAccessToken(data.accessToken);
+        context.setUser(data.user);
+        showToast("Đăng nhập thành công!", "success");
+        setTimeout(() => {
+          context.setisOpenHeaderFooterShow(true);
+          navigate("/");
+        }, 1000);
+      } else {
+        showToast(data?.message || "Đăng nhập Google thất bại", "error");
+      }
+    } catch (error) {
+      if (error.code !== "auth/popup-closed-by-user") {
+        showToast("Đăng nhập Google thất bại", "error");
+      }
+    }
+  };
 
   return (
     <>
@@ -153,9 +183,13 @@ const SignIn = () => {
                 <div className="line" />
               </div>
 
-              <Button className="loginWithGoogle mt-2" variant="outlined">
+              <Button
+                className="loginWithGoogle mt-2"
+                variant="outlined"
+                onClick={handleGoogleLogin}
+              >
                 <FcGoogle className="me-2" />
-                Login with Google
+                Đăng nhập với Google
               </Button>
             </form>
           </div>

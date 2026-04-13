@@ -80,3 +80,81 @@
     background: #f0f0f0;
     color: #333;
 }
+
+/* ============= Payment Result Page ============= */
+.paymentResultPage {
+    min-height: 60vh;
+    padding: 30px 0;
+}
+
+.paymentResultIcon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.paymentResultIcon.success {
+    background: #e6f9e6;
+}
+
+.paymentResultIcon.failed {
+    background: #fee;
+}
+
+.paymentResultIcon span {
+    font-size: 40px;
+}
+
+.paymentResultIcon.success span {
+    color: #22c55e;
+}
+
+.paymentSuccessTitle {
+    color: #22c55e;
+}
+
+/* Listing product count */
+.productCountText {
+    font-size: 13px;
+    color: #999;
+}
+
+/* Banking Note */
+.bankingNote {
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 8px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.bankingNoteList {
+    padding-left: 18px;
+}
+
+/* Banking success icon */
+.bankingPaymentCard .successIcon svg {
+    font-size: 64px;
+    color: #4caf50;
+}
+
+.bankingPaymentCard .bankingValue.highlight-amount {
+    color: #d32f2f;
+    font-weight: 700;
+}
+
+.bankingPaymentCard .bankingValue.highlight-content {
+    font-weight: 700;
+}
+
+.bankingPaymentCard .copyBtn svg {
+    font-size: 18px;
+}
+
+.bankingPaymentCard .copyBtn.copied svg {
+    color: #4caf50;
+}

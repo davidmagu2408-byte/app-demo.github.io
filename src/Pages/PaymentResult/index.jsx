@@ -61,7 +61,7 @@ const PaymentResult = () => {
 
   if (status === "loading") {
     return (
-      <section className="section" style={{ minHeight: "60vh" }}>
+      <section className="section paymentResultPage">
         <div className="container text-center py-5">
           <CircularProgress size={48} />
           <h4 className="mt-3">Đang xác nhận thanh toán...</h4>
@@ -73,21 +73,10 @@ const PaymentResult = () => {
 
   if (status === "failed") {
     return (
-      <section className="section" style={{ minHeight: "60vh" }}>
+      <section className="section paymentResultPage">
         <div className="container text-center py-5">
-          <div
-            style={{
-              width: 80,
-              height: 80,
-              borderRadius: "50%",
-              background: "#fee",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginBottom: 16,
-            }}
-          >
-            <span style={{ fontSize: 40 }}>✗</span>
+          <div className="paymentResultIcon failed">
+            <span>✗</span>
           </div>
           <h3 className="text-danger">Thanh toán thất bại</h3>
           <p className="text-light">
@@ -113,23 +102,12 @@ const PaymentResult = () => {
   }
 
   return (
-    <section className="section" style={{ minHeight: "60vh" }}>
+    <section className="section paymentResultPage">
       <div className="container text-center py-5">
-        <div
-          style={{
-            width: 80,
-            height: 80,
-            borderRadius: "50%",
-            background: "#e6f9e6",
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 16,
-          }}
-        >
-          <span style={{ fontSize: 40, color: "#22c55e" }}>✓</span>
+        <div className="paymentResultIcon success">
+          <span>✓</span>
         </div>
-        <h3 style={{ color: "#22c55e" }}>Thanh toán thành công!</h3>
+        <h3 className="paymentSuccessTitle">Thanh toán thành công!</h3>
         <p className="text-light">
           Đơn hàng của bạn đã được thanh toán qua MoMo.
         </p>

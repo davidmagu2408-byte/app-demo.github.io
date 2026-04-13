@@ -83,3 +83,54 @@
     justify-content: center;
     z-index: 1;
 }
+
+/* Checkout order item */
+.checkoutItemInfo {
+    flex: 1;
+    min-width: 0;
+}
+
+.checkoutItemName {
+    font-size: 13px;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+.checkoutItemPrice {
+    font-size: 13px;
+}
+
+.checkoutPage .card {
+    border-radius: 12px !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+.checkoutPage .card h5 {
+    font-size: 18px;
+    border-bottom: 2px solid #f1f1f1;
+    padding-bottom: 12px;
+}
+
+.paymentInfoText {
+    font-size: 13px;
+}
+
+.checkoutTotalLabel {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.checkoutTotalValue {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.momoIcon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}

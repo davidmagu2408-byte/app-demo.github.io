@@ -2,11 +2,12 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import "react-range-slider-input/dist/style.css";
 import RangeSlider from "react-range-slider-input";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
+import Button from "@mui/material/Button";
 
-const SideBar = ({ categoryId, subCatId }) => {
+const SideBar = ({ categoryId, subCatId, onPriceFilter }) => {
   const context = useContext(MyContext);
   const navigate = useNavigate();
   const [value, setValue] = useState([100, 60000000]);
@@ -18,9 +19,17 @@ const SideBar = ({ categoryId, subCatId }) => {
   const subcategories = subcategoryData?.subCategory || [];
 
   // Subcategories for the current category
-  const currentSubCats = subcategories.filter(
-    (s) => s.category === categoryId
-  );
+  const currentSubCats = subcategories.filter((s) => s.category === categoryId);
+
+  useEffect(() => {
+    setValue([100, 60000000]);
+  }, [categoryId, subCatId]);
+
+  const handleApplyFilter = () => {
+    if (onPriceFilter) {
+      onPriceFilter(value[0], value[1]);
+    }
+  };
 
   return (
     <div className="sidebar">
@@ -95,6 +104,14 @@ const SideBar = ({ categoryId, subCatId }) => {
             </strong>
           </span>
         </div>
+        <Button
+          className="btn-blue btn-sm w-100 mt-2"
+          onClick={handleApplyFilter}
+          variant="contained"
+          size="small"
+        >
+          Áp dụng
+        </Button>
       </div>
     </div>
   );

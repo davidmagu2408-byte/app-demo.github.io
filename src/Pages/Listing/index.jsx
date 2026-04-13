@@ -18,8 +18,10 @@ const Listing = () => {
 
   const [productView, setproductView] = useState("four");
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [priceRange, setPriceRange] = useState(null);
   const perPage = 12;
 
   // Find current category/subcategory names
@@ -37,6 +39,7 @@ const Listing = () => {
   useEffect(() => {
     setLoading(true);
     setPage(1);
+    setPriceRange(null);
     const endpoint = subCatId
       ? `/product/subcategory/${subCatId}`
       : `/product/category/${id}`;
@@ -44,19 +47,29 @@ const Listing = () => {
       .then((data) => {
         if (data?.success) {
           setProducts(data.products);
+          setFilteredProducts(data.products);
         } else {
           setProducts([]);
+          setFilteredProducts([]);
         }
         setLoading(false);
       })
       .catch(() => {
         setProducts([]);
+        setFilteredProducts([]);
         setLoading(false);
       });
   }, [id, subCatId]);
 
-  const totalPages = Math.max(1, Math.ceil(products.length / perPage));
-  const paginatedProducts = products.slice(
+  const handlePriceFilter = (min, max) => {
+    setPriceRange([min, max]);
+    setPage(1);
+    const filtered = products.filter((p) => p.price >= min && p.price <= max);
+    setFilteredProducts(filtered);
+  };
+
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / perPage));
+  const paginatedProducts = filteredProducts.slice(
     (page - 1) * perPage,
     page * perPage,
   );
@@ -66,7 +79,11 @@ const Listing = () => {
       <section className="product_Listing_Page">
         <div className="container">
           <div className="productListing d-flex">
-            <SideBar categoryId={id} subCatId={subCatId} />
+            <SideBar
+              categoryId={id}
+              subCatId={subCatId}
+              onPriceFilter={handlePriceFilter}
+            />
             <div className="content_right">
               <div className="showBy mt-0 mb-3 d-flex align-items-center">
                 <div className="d-flex align-items-center btnWrapper">
@@ -94,8 +111,8 @@ const Listing = () => {
                     {currentSubCat
                       ? currentSubCat.name
                       : currentCat?.name || "Sản phẩm"}
-                    <span className="text-light ms-2" style={{ fontSize: 13 }}>
-                      ({products.length} sản phẩm)
+                    <span className="productCountText ms-2">
+                      ({filteredProducts.length} sản phẩm)
                     </span>
                   </h6>
                 </div>
@@ -105,7 +122,7 @@ const Listing = () => {
                 <div className="text-center py-5">
                   <p>Đang tải...</p>
                 </div>
-              ) : products.length === 0 ? (
+              ) : filteredProducts.length === 0 ? (
                 <div className="text-center py-5">
                   <h5>Không có sản phẩm nào</h5>
                 </div>

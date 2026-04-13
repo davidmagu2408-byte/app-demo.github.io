@@ -9,15 +9,21 @@ import ProductItem from "../../Components/ProductItem";
 import HomeCate from "../../Components/HomeCate";
 import { useEffect, useState } from "react";
 import { fetchDataFromAPI } from "../../apis/api";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [productData, setProductData] = useState([]);
-  const [userProfile, setUserProfile] = useState([]);
+  const [newProducts, setNewProducts] = useState([]);
   const month = new Date().getMonth() + 1;
   useEffect(() => {
     fetchDataFromAPI("/product/featured")
       .then((data) => setProductData(data))
       .catch(() => setProductData([]));
+    fetchDataFromAPI("/product/new?limit=12")
+      .then((data) => {
+        if (data?.success) setNewProducts(data.products);
+      })
+      .catch(() => setNewProducts([]));
   }, []);
   return (
     <>
@@ -78,9 +84,9 @@ const Home = () => {
               </div>
               <div className="d-flex align-items-center">
                 <div className="info w-75">
-                  <h3 className="mb-0 hd">New products</h3>
+                  <h3 className="mb-0 hd">Sản phẩm mới</h3>
                   <p className="text-light text-sml mb-0">
-                    New products with updated stocks.
+                    Sản phẩm mới nhất vừa cập nhật.
                   </p>
                 </div>
                 <Button className="viewAllBtn ms-auto">
@@ -88,19 +94,26 @@ const Home = () => {
                   <IoIosArrowRoundForward />
                 </Button>
               </div>
-              <div className="product_row productRow2 w-100 mt-4 d-flex">
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
+              <div className="product_row w-100 mt-4 mb-4">
+                <Swiper
+                  slidesPerView={4}
+                  spaceBetween={10}
+                  navigation={true}
+                  slidesPerGroup={3}
+                  modules={[Navigation, Virtual]}
+                  className="mySwiper"
+                  virtual
+                >
+                  {newProducts.length > 0 &&
+                    newProducts.map((item, index) => (
+                      <SwiperSlide
+                        key={item._id || item.id}
+                        virtualIndex={index}
+                      >
+                        <ProductItem item={item} />
+                      </SwiperSlide>
+                    ))}
+                </Swiper>
               </div>
 
               {/* <div className="row">

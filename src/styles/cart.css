@@ -98,3 +98,9 @@
     font-weight: 800 !important;
     padding-bottom: 15px;
 }
+
+.cartFreeShipHint {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #999;
+}
