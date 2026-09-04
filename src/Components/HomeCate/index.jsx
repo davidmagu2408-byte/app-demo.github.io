@@ -17,9 +17,16 @@ const HomeCate = () => {
             <div className="info2">Featured Categories</div>
             <Swiper
               slidesPerView={8}
-              spaceBetween={30}
+              spaceBetween={20}
               navigation={true}
               slidesPerGroup={3}
+              breakpoints={{
+                0: { slidesPerView: 2, slidesPerGroup: 1 },
+                480: { slidesPerView: 3, slidesPerGroup: 1 },
+                640: { slidesPerView: 4, slidesPerGroup: 2 },
+                900: { slidesPerView: 6, slidesPerGroup: 2 },
+                1200: { slidesPerView: 8, slidesPerGroup: 3 },
+              }}
               modules={[Navigation, Virtual]}
               className="mySwiper"
               virtual
@@ -33,7 +40,7 @@ const HomeCate = () => {
                         className="item text-center cursor"
                         style={{ background: item.color }}
                       >
-                        <img src={item.images} alt="category" />
+                        <img src={item.images?.[0] || ""} alt={item.name} />
                       </div>
                       <h6>{item.name}</h6>
                     </SwiperSlide>

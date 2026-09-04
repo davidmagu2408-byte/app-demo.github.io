@@ -6,17 +6,46 @@ import { useContext, useState } from "react";
 import { FaAngleRight } from "react-icons/fa6";
 import { MyContext } from "../../../App";
 
-const Navigation = () => {
+const Navigation = ({ isMobileMenuOpen, onMobileMenuToggle }) => {
   const [isopenSidebarNav, setisopenSidebarNav] = useState(false);
   const context = useContext(MyContext);
   const categoryData = context.categoryData;
   const subcategoryData = context.subcategoryData;
 
+  const renderCategoryLinks = () =>
+    categoryData?.categoryList &&
+    categoryData.categoryList.length > 0 &&
+    categoryData.categoryList.map((item) => {
+      const subItems = subcategoryData?.subCategoryList || [];
+      return (
+        <li className="list-inline-item" key={item.id || item._id}>
+          <Link to={`/cat/${item._id}`} onClick={() => onMobileMenuToggle?.(false)}>
+            <Button>{item.name}</Button>
+          </Link>
+          {subItems.filter((sub) => String(sub.category) === String(item._id || item.id)).length > 0 && (
+            <div className="submenu shadow">
+              {subItems
+                .filter((sub) => String(sub.category) === String(item._id || item.id))
+                .map((it) => (
+                  <Link
+                    to={`/cat/${item._id}?subCat=${it._id}`}
+                    key={it._id || it.id}
+                    onClick={() => onMobileMenuToggle?.(false)}
+                  >
+                    <Button>{it.name}</Button>
+                  </Link>
+                ))}
+            </div>
+          )}
+        </li>
+      );
+    });
+
   return (
     <>
-      <nav>
+      <nav className={`mainNav ${isMobileMenuOpen ? "mobile-open" : ""}`}>
         <div className="container">
-          <div className="row">
+          <div className="row navRow">
             <div className="col-sm-2 navPart1">
               <div className="catWrapper">
                 <Button
@@ -37,30 +66,33 @@ const Navigation = () => {
                   className={`sidebarNav ${isopenSidebarNav === true ? "open" : ""}`}
                 >
                   <ul>
-                    {categoryData.category &&
-                      categoryData.category.length > 0 &&
-                      categoryData.category.map((item) => {
+                    {categoryData?.categoryList &&
+                      categoryData.categoryList.length > 0 &&
+                      categoryData.categoryList.map((item) => {
+                        const subItems = subcategoryData?.subCategoryList || [];
                         return (
-                          <li key={item.id}>
-                            <Link to={`/cat/${item._id}`}>
+                          <li key={item.id || item._id}>
+                            <Link to={`/cat/${item._id}`} onClick={() => setisopenSidebarNav(false)}>
                               <Button>
                                 {item.name}
                                 <FaAngleRight className="ms-auto" />
                               </Button>
                             </Link>
-                            <div className="submenu">
-                              {subcategoryData.subCategory &&
-                                subcategoryData.subCategory.length > 0 &&
-                                subcategoryData.subCategory
-                                  .filter((sub) => sub.category === item.id)
-                                  .map((it) => {
-                                    return (
-                                      <Link to={`/cat/${item._id}?subCat=${it._id}`} key={it.id}>
-                                        <Button>{it.name}</Button>
-                                      </Link>
-                                    );
-                                  })}
-                            </div>
+                            {subItems.filter((sub) => String(sub.category) === String(item._id || item.id)).length > 0 && (
+                              <div className="submenu">
+                                {subItems
+                                  .filter((sub) => String(sub.category) === String(item._id || item.id))
+                                  .map((it) => (
+                                    <Link
+                                      to={`/cat/${item._id}?subCat=${it._id}`}
+                                      key={it._id || it.id}
+                                      onClick={() => setisopenSidebarNav(false)}
+                                    >
+                                      <Button>{it.name}</Button>
+                                    </Link>
+                                  ))}
+                              </div>
+                            )}
                           </li>
                         );
                       })}
@@ -69,31 +101,17 @@ const Navigation = () => {
               </div>
             </div>
             <div className="col-sm-10 navPart2 d-flex justify-items-center">
-              <ul className="list list-inline ms-auto me-5">
-                {categoryData.category &&
-                  categoryData.category.length > 0 &&
-                  categoryData.category.map((item) => {
-                    return (
-                      <li className="list-inline-item" key={item.id}>
-                        <Link to={`/cat/${item._id}`}>
-                          <Button>{item.name}</Button>
-                        </Link>
-                        <div className="submenu shadow">
-                          {subcategoryData.subCategory &&
-                            subcategoryData.subCategory.length > 0 &&
-                            subcategoryData.subCategory
-                              .filter((sub) => sub.category === item.id)
-                              .map((it) => {
-                                return (
-                                  <Link to={`/cat/${item._id}?subCat=${it._id}`} key={it.id}>
-                                    <Button>{it.name}</Button>
-                                  </Link>
-                                );
-                              })}
-                        </div>
-                      </li>
-                    );
-                  })}
+              <div className="mobileNavToggleWrap">
+                <Button
+                  className="mobileNavToggle"
+                  onClick={() => onMobileMenuToggle?.(!isMobileMenuOpen)}
+                >
+                  <FiMenu />
+                  Menu
+                </Button>
+              </div>
+              <ul className={`list list-inline ms-auto me-5 ${isMobileMenuOpen ? "mobile-open" : ""}`}>
+                {renderCategoryLinks()}
               </ul>
             </div>
           </div>

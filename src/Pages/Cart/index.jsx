@@ -57,7 +57,7 @@ const Cart = () => {
                   <tbody>
                     {cartData.map((item) => (
                       <tr key={item.productId}>
-                        <td width="35%">
+                        <td width="35%" data-label="Sản phẩm">
                           <div className="d-flex align-items-center cartItemimgWrapper">
                             <div className="imgWrapper">
                               <img
@@ -73,8 +73,10 @@ const Cart = () => {
                             </div>
                           </div>
                         </td>
-                        <td width="15%">{formatVND(item.price)}</td>
-                        <td width="25%">
+                        <td width="15%" data-label="Đơn giá">
+                          {formatVND(item.price)}
+                        </td>
+                        <td width="25%" data-label="Số lượng">
                           <div className="quantityDrop d-flex align-items-center">
                             <Button
                               onClick={() =>
@@ -95,10 +97,10 @@ const Cart = () => {
                             </Button>
                           </div>
                         </td>
-                        <td width="15%">
+                        <td width="15%" data-label="Thành tiền">
                           {formatVND(item.price * item.quantity)}
                         </td>
-                        <td width="10%">
+                        <td width="10%" data-label="Xoá">
                           <span
                             className="remove cursor"
                             onClick={() => removeFromCart(item.productId)}

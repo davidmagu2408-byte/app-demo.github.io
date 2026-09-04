@@ -1,202 +1,323 @@
 /* Navbar */
+.mainNav,
 nav {
-    background: #2bbef9;
-    padding: 10px 0;
-    position: relative;
-    z-index: 999;
+  background: linear-gradient(135deg, #1d4ed8 0%, #1f9fee 100%);
+  padding: 10px 0;
+  position: relative;
+  z-index: 999;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 nav .navPart1 {
-    max-width: 20%;
-    flex: 0 0 20%;
+  display: flex;
+  max-width: 20%;
+  flex: 0 0 20%;
 }
 
 nav .navPart1 .catWrapper {
-    position: relative;
-    z-index: 100;
+  display: flex;
+  position: relative;
+  z-index: 100;
 }
 
 nav .navPart1 .catWrapper .sidebarNav {
-    width: 100%;
-    height: auto;
-    background: #fff;
-    position: absolute;
-    top: 110%;
-    left: 0px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(8px);
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  height: auto;
+  background: #fff;
+  position: absolute;
+  top: 110%;
+  left: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(8px);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 nav .navPart1 .catWrapper .open {
-    height: auto;
-    opacity: 1;
-    visibility: inherit;
-    transform: translateY(0);
+  height: auto;
+  opacity: 1;
+  visibility: inherit;
+  transform: translateY(0);
 }
 
 nav .navPart1 .catWrapper .sidebarNav ul li {
-    width: 100%;
-    list-style: none;
-    padding: 5px 0px;
+  width: 100%;
+  list-style: none;
+  padding: 5px 0px;
 }
 
 nav .navPart1 .catWrapper .sidebarNav ul li button {
-    color: #000;
-    width: 100%;
-    justify-content: flex-start;
-    text-transform: capitalize !important;
+  color: #000;
+  width: 100%;
+  justify-content: flex-start;
+  text-transform: capitalize !important;
 }
 
 nav .navPart1 .catWrapper .sidebarNav ul li button svg {
-    font-size: 12px;
-    opacity: 0.6;
+  font-size: 12px;
+  opacity: 0.6;
 }
 
 nav .navPart1 .catWrapper .sidebarNav ul li button:hover {
-    background: transparent !important;
+  background: transparent !important;
 }
 
 nav .navPart1 .catWrapper .sidebarNav ul li {
-    position: static;
+  position: static;
 }
 
 nav .navPart1 .catWrapper .sidebarNav ul li .submenu {
-    position: absolute;
-    top: 0px;
-    left: 101%;
-    width: 250px;
-    height: auto;
-    background: #fff;
-    z-index: 100;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
-    transform: translateX(8px);
+  position: absolute;
+  top: 0px;
+  left: 101%;
+  width: 250px;
+  height: auto;
+  background: #fff;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  transform: translateX(8px);
 }
 
 nav .navPart1 .catWrapper .sidebarNav ul li:hover .submenu {
-    opacity: 1;
-    visibility: inherit;
-    left: 101%;
-    padding: 0px;
-    transform: translateX(0);
+  opacity: 1;
+  visibility: inherit;
+  left: 101%;
+  padding: 0px;
+  transform: translateX(0);
 }
 
 nav .navPart1 .catWrapper .sidebarNav ul li:hover .submenu button {
-    border-radius: 0px !important;
+  border-radius: 0px !important;
 }
 
 nav .navPart2 {
-    max-width: 80%;
-    flex: 0 0 80%;
+  max-width: 80%;
+  flex: 0 0 80%;
 }
 
 nav .AllCateTab {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 8px 20px !important;
-    border-radius: 30px !important;
-    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 20px !important;
+  border-radius: 30px !important;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
 nav .AllCateTab * {
-    color: #fff;
+  color: #fff;
 }
 
 nav .AllCateTab:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 nav .AllCateTab .text {
-    font-weight: 600;
-    font-size: 11px;
-    margin-top: 4px;
+  font-weight: 600;
+  font-size: 11px;
+  margin-top: 4px;
 }
 
 nav .AllCateTab .icon1 svg {
-    font-size: 22px !important;
-    padding-right: 10px;
+  font-size: 22px !important;
+  padding-right: 10px;
 }
 
 nav .AllCateTab .icon2 svg {
-    font-size: 18px !important;
-    padding-left: 10px;
+  font-size: 18px !important;
+  padding-left: 10px;
 }
 
 nav .navPart2 ul {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 nav .navPart2 ul li a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 nav .navPart2 ul li a button {
-    font-size: 14px !important;
-    font-weight: 600;
-    text-decoration: none;
-    color: #fff;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    border-radius: 25px;
-    position: relative;
+  font-size: 14px !important;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 25px;
+  position: relative;
 }
 
 nav .navPart2 ul li a svg {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 nav .navPart2 ul li button:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
 }
 
 nav .navPart2 ul li {
-    position: relative;
+  position: relative;
 }
 
 nav .navPart2 ul li .submenu {
-    position: absolute;
-    top: 150%;
-    left: 0px;
-    min-width: 200px;
-    background: #fff;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    z-index: 100;
-    transform: translateY(8px);
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 150%;
+  left: 0px;
+  min-width: 200px;
+  background: #fff;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 100;
+  transform: translateY(8px);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 nav .navPart2 ul li .submenu a {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }
 
 nav .navPart2 ul li .submenu a button {
-    width: 100%;
-    justify-content: flex-start !important;
-    border-radius: 0px !important;
-    text-transform: capitalize !important;
-    font-weight: 600 !important;
-    color: #333 !important;
+  width: 100%;
+  justify-content: flex-start !important;
+  border-radius: 0px !important;
+  text-transform: capitalize !important;
+  font-weight: 600 !important;
+  color: #333 !important;
 }
 
 nav .navPart2 ul li:hover .submenu {
-    opacity: 1;
-    visibility: inherit;
-    top: 100%;
-    transform: translateY(0);
+  opacity: 1;
+  visibility: inherit;
+  top: 100%;
+  transform: translateY(0);
+}
+
+.mainNav .mobileNavToggleWrap {
+  display: none;
+}
+
+.mainNav .mobileNavToggle {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .mainNav,
+  nav {
+    padding: 8px 0;
+  }
+
+  .mainNav .navRow,
+  nav .navRow {
+    display: block;
+  }
+
+  .mainNav .navPart1,
+  nav .navPart1,
+  .mainNav .navPart2,
+  nav .navPart2 {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .mainNav .navPart2,
+  nav .navPart2 {
+    margin-top: 12px;
+  }
+
+  .mainNav .navPart2 ul,
+  nav .navPart2 ul {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: flex-start;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 14px;
+    padding: 10px;
+    margin: 0;
+    width: 100%;
+  }
+
+  .mainNav .navPart2 ul.mobile-open,
+  nav .navPart2 ul.mobile-open {
+    display: flex;
+  }
+
+  .mainNav .navPart2 ul li,
+  nav .navPart2 ul li {
+    width: 100%;
+  }
+
+  .mainNav .navPart2 ul li a,
+  nav .navPart2 ul li a {
+    display: block;
+    width: 100%;
+  }
+
+  .mainNav .navPart2 ul li a button,
+  nav .navPart2 ul li a button {
+    width: 100%;
+    justify-content: flex-start !important;
+    padding: 8px 12px;
+    font-size: 12px !important;
+    border-radius: 10px;
+  }
+
+  .mainNav .mobileNavToggleWrap,
+  nav .mobileNavToggleWrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+  }
+
+  .mainNav .mobileNavToggle,
+  nav .mobileNavToggle {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+    color: #fff !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 999px !important;
+    padding: 7px 14px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+  }
+}
+
+@media (max-width: 575px) {
+  .mainNav .AllCateTab,
+  nav .AllCateTab {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mainNav .navPart2 ul,
+  nav .navPart2 ul {
+    justify-content: center;
+  }
+
+  .mainNav .navPart2 ul li a button,
+  nav .navPart2 ul li a button {
+    padding: 7px 10px;
+    font-size: 11px !important;
+  }
+
+  .mainNav .navPart1 .catWrapper .sidebarNav,
+  nav .navPart1 .catWrapper .sidebarNav {
+    width: min(320px, calc(100vw - 24px));
+  }
 }

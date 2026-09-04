@@ -3,7 +3,7 @@ import Logo from "../../assets/images/logo.webp";
 import CountryDropDown from "../CountryDropDown";
 import Button from "@mui/material/Button";
 import { IoBagOutline } from "react-icons/io5";
-import { FiUser } from "react-icons/fi";
+import { FiMenu, FiUser } from "react-icons/fi";
 import {
   IoLogOutOutline,
   IoReceiptOutline,
@@ -23,6 +23,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const open = Boolean(anchorEl);
 
   const handleUserClick = (e) => {
@@ -70,6 +71,12 @@ const Header = () => {
                   <CountryDropDown />
                 )}
                 <SearchBox />
+                <Button
+                  className="mobileMenuToggle"
+                  onClick={() => setMobileMenuOpen((prev) => !prev)}
+                >
+                  <FiMenu />
+                </Button>
                 <div className="part3 d-flex align-items-center">
                   {context.user ? (
                     <>
@@ -162,7 +169,7 @@ const Header = () => {
             </div>
           </div>
         </header>
-        <Navigation />
+        <Navigation isMobileMenuOpen={mobileMenuOpen} onMobileMenuToggle={setMobileMenuOpen} />
       </div>
     </>
   );

@@ -134,7 +134,7 @@ const Listing = () => {
                         ? "list"
                         : productView === "three"
                           ? "three"
-                          : ""
+                          : "four"
                     }`}
                   >
                     {paginatedProducts.map((item) => (

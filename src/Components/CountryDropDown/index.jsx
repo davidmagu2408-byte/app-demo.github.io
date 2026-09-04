@@ -16,7 +16,6 @@ const CountryDropDown = () => {
   const [selectTab, setselectTab] = useState(null);
   const [countryList, setcountryList] = useState([]);
   const context = useContext(MyContext);
-
   const setselectCountry = (index, country) => {
     setselectTab(index);
     setopenModel(false);
@@ -25,13 +24,15 @@ const CountryDropDown = () => {
 
   const filterList = (e) => {
     const keyword = e.target.value.toLowerCase();
+    const sourceList = context.countryList || [];
     if (keyword !== "") {
-      const list = countryList.filter((item) => {
-        return item.country.toLowerCase().includes(keyword);
+      const list = sourceList.filter((item) => {
+        const name = (item.name || item.country || "").toLowerCase();
+        return name.includes(keyword);
       });
       setcountryList(list);
     } else {
-      setcountryList(context.countryList);
+      setcountryList(sourceList);
     }
   };
   useEffect(() => {
@@ -75,20 +76,16 @@ const CountryDropDown = () => {
             </Button>
           </div>
           <ul className="countryList mt-3">
-            {countryList &&
-              countryList.length !== 0 &&
-              countryList?.map((item, index) => {
-                return (
-                  <li key={index}>
-                    <Button
-                      onClick={() => setselectCountry(index, item.name)}
-                      className={`${selectTab === index ? "active" : ""}`}
-                    >
-                      {item.name}
-                    </Button>
-                  </li>
-                );
-              })}
+            {countryList.map((item, index) => (
+              <li key={item.id}>
+                <Button
+                  onClick={() => setselectCountry(index, item.name)}
+                  className={selectTab === index ? "active" : ""}
+                >
+                  {item.name}
+                </Button>
+              </li>
+            ))}
           </ul>
         </Dialog>
       </div>

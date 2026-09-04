@@ -11,6 +11,8 @@ import toast from "react-hot-toast";
 const ProductItem = (props) => {
   const context = useContext(MyContext);
   if (!props.item) return null;
+  const productImage = props.item.images?.[0] || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80";
+
   const viewProductDetails = (id) => {
     context.setisOpenProductModal({
       id: id,
@@ -21,10 +23,6 @@ const ProductItem = (props) => {
   const handleAddToCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!context.user) {
-      toast.error("Vui lòng đăng nhập để thêm vào giỏ hàng");
-      return;
-    }
     if (props.item.countInStock === 0) {
       toast.error("Sản phẩm đã hết hàng");
       return;
@@ -40,7 +38,7 @@ const ProductItem = (props) => {
           to={`/product/${props.item._id || props.item.id}`}
           className="img_wrapper d-block"
         >
-          <img src={props.item.images[0]} className="w-100" alt="product" />
+          <img src={productImage} className="w-100" alt="product" />
           <span className="badge badge-primary">{props.item.discount}%</span>
           <div className="actions">
             <Button

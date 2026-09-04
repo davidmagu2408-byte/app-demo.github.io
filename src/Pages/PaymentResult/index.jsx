@@ -18,8 +18,12 @@ const PaymentResult = () => {
       try {
         const decoded = JSON.parse(atob(extraData));
         setOrderId(decoded.orderId);
+        localStorage.removeItem("pendingMomoCart");
+        window.dispatchEvent(new CustomEvent("cart:sync", { detail: [] }));
         pollPaymentStatus(decoded.orderId);
       } catch {
+        localStorage.removeItem("pendingMomoCart");
+        window.dispatchEvent(new CustomEvent("cart:sync", { detail: [] }));
         setStatus("success");
       }
     } else {
@@ -30,6 +34,20 @@ const PaymentResult = () => {
       } catch {
         // ignore
       }
+
+      const pendingCart = localStorage.getItem("pendingMomoCart");
+      if (pendingCart) {
+        try {
+          const restoredCart = JSON.parse(pendingCart);
+          if (Array.isArray(restoredCart)) {
+            window.dispatchEvent(new CustomEvent("cart:sync", { detail: restoredCart }));
+          }
+        } catch {
+          // ignore malformed pending cart
+        }
+      }
+
+      localStorage.removeItem("pendingMomoCart");
       setStatus("failed");
     }
   }, []);

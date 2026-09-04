@@ -42,7 +42,7 @@ const Home = () => {
               </div>
               <div className="banner mt-5">
                 <img
-                  src="https://api.spicezgold.com/download/file_1734525767798_NewProject(35).jpg"
+                  src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80"
                   alt="banner"
                   className="cursor w-100"
                 ></img>
@@ -67,6 +67,12 @@ const Home = () => {
                   spaceBetween={10}
                   navigation={true}
                   slidesPerGroup={3}
+                  breakpoints={{
+                    0: { slidesPerView: 1, slidesPerGroup: 1 },
+                    480: { slidesPerView: 2, slidesPerGroup: 1 },
+                    768: { slidesPerView: 3, slidesPerGroup: 2 },
+                    1024: { slidesPerView: 4, slidesPerGroup: 3 },
+                  }}
                   modules={[Navigation, Virtual]}
                   className="mySwiper"
                   virtual
@@ -100,6 +106,12 @@ const Home = () => {
                   spaceBetween={10}
                   navigation={true}
                   slidesPerGroup={3}
+                  breakpoints={{
+                    0: { slidesPerView: 1, slidesPerGroup: 1 },
+                    480: { slidesPerView: 2, slidesPerGroup: 1 },
+                    768: { slidesPerView: 3, slidesPerGroup: 2 },
+                    1024: { slidesPerView: 4, slidesPerGroup: 3 },
+                  }}
                   modules={[Navigation, Virtual]}
                   className="mySwiper"
                   virtual
@@ -118,10 +130,13 @@ const Home = () => {
 
               {/* <div className="row">
                 <div className="banner mt-4">
-                  <img src="" alt="" className="cursor w-100" />
+                  <img
+                    src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80"
+                    alt="featured banner"
+                    className="cursor w-100"
+                  />
                 </div>
-              </div> */}
-            </div>
+              </div> */}            </div>
           </div>
         </div>
       </section>

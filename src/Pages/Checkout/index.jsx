@@ -138,6 +138,17 @@ const Checkout = () => {
       return;
     }
 
+    const invalidCartItem = cartData.find(
+      (item) => Number(item.quantity) > Number(item.countInStock ?? 0),
+    );
+    if (invalidCartItem) {
+      showToast(
+        `Sản phẩm ${invalidCartItem.name} vượt quá số lượng còn lại trong kho`,
+        "error",
+      );
+      return;
+    }
+
     setIsLoading(true);
     try {
       const payload = {
@@ -173,7 +184,7 @@ const Checkout = () => {
             setIsLoading(false);
             return;
           }
-          clearCart();
+          localStorage.setItem("pendingMomoCart", JSON.stringify(cartData));
           window.location.href = data.payUrl;
           return;
         } else {

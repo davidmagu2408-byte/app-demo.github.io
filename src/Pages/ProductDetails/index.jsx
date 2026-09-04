@@ -120,8 +120,8 @@ const ProductDetails = () => {
   };
 
   const handleAddToCart = () => {
-    if (!context.user) {
-      toast.error("Vui lòng đăng nhập để thêm vào giỏ hàng");
+    if (product.countInStock === 0) {
+      toast.error("Sản phẩm đã hết hàng");
       return;
     }
     context.addToCart(product, qty);

@@ -3,6 +3,9 @@ import { MyContext } from "../../App";
 import Logo from "../../assets/images/logo.webp";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { FcGoogle } from "react-icons/fc";
 import { postData } from "../../apis/api";
 import { useToast } from "../../utils/Toast";
@@ -16,6 +19,8 @@ const SignUp = () => {
   const { showToast } = useToast();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formField, setFormField] = useState({
     email: "",
     password: "",
@@ -26,6 +31,11 @@ const SignUp = () => {
     isAdmin: false,
   });
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const emailIsValid = (value) => /\S+@\S+\.\S+/.test(value);
+  const phoneIsValid = (value) => /^0\d{9,10}$/.test(value);
+  const passwordIsStrongEnough = (value) =>
+    value.length >= 8 && /[A-Z]/.test(value) && /\d/.test(value);
 
   const changeInput = (e) => {
     setFormField({
@@ -48,17 +58,39 @@ const SignUp = () => {
       showToast("Vui lòng điền đầy đủ thông tin", "error");
       return;
     }
+
+    if (!emailIsValid(formField.email)) {
+      showToast("Email không hợp lệ", "error");
+      return;
+    }
+
+    if (!phoneIsValid(formField.phone)) {
+      showToast("Số điện thoại phải bắt đầu bằng 0 và có 10-11 chữ số", "error");
+      return;
+    }
+
+    if (!passwordIsStrongEnough(formField.password)) {
+      showToast("Mật khẩu tối thiểu 8 ký tự, bao gồm chữ hoa và số", "error");
+      return;
+    }
+
     if (formField.password !== confirmPassword) {
       showToast("Mật khẩu không khớp", "error");
       return;
     }
+    const payload = {
+      ...formField,
+      name: formField.name.trim(),
+      email: formField.email.trim(),
+      phone: formField.phone.trim(),
+      address: "",
+      images: "",
+      password: formField.password.trim(),
+    };
+
     setIsLoading(true);
     try {
-      const data = await postData("/user/register", {
-        ...formField,
-        address: "",
-        images: "",
-      });
+      const data = await postData("/user/register", payload);
       if (data && data.success === true) {
         showToast("Đăng ký thành công!", "success");
         setTimeout(() => {
@@ -119,28 +151,32 @@ const SignUp = () => {
           >
             <path
               d="M0,413.1v406.7h1921V0.5h-0.4l-228.1,598.3c-30,74.235-80.8,130.6-152.5,168.6c-107.6,57-212.1,40.7-245.7,34.4 c-22.4-4.2-54.9-13.1-97.5-26.6L0,400.5V413.1z"
-              fill="#007BFF"
+              fill="#2563eb"
             />
           </svg>
         </div>
-        <div className="container">
-          <div className="box card p-3 shadow border-0">
+        <div className="container authContainer">
+          <div className="box card shadow border-0">
             <div className="text-center imgSignIn">
               <img src={Logo} alt="Logo" />
             </div>
+            <div className="text-center mt-2 brandHeader">
+              <span className="brandBadge">Create account</span>
+              <h2>ECOMMERCE WEBSITE</h2>
+            </div>
             <form className="mt-1" onSubmit={handleSignUp}>
-              <h2 className="mb-2">Đăng ký tài khoản</h2>
-              <div className="row">
+              <h2 className="mb-3 authTitle">Đăng ký tài khoản</h2>
+              <div className="row g-2">
                 <div className="col-md-6">
                   <div className="form-group">
                     <TextField
-                      id="standard-basic"
                       label="Họ và tên"
                       type="text"
                       name="name"
-                      variant="standard"
+                      variant="outlined"
                       required
-                      className="w-100"
+                      className="w-100 authField"
+                      size="small"
                       onChange={changeInput}
                     />
                   </div>
@@ -148,16 +184,23 @@ const SignUp = () => {
                 <div className="col-md-6">
                   <div className="form-group">
                     <TextField
-                      id="standard-basic"
                       label="Số điện thoại"
                       type="tel"
-                      variant="standard"
+                      variant="outlined"
                       name="phone"
+                      value={formField.phone}
                       placeholder="09xx xxx xxx"
                       pattern="[0-9]*"
                       inputMode="numeric"
                       required
-                      className="w-100"
+                      className="w-100 authField"
+                      size="small"
+                      error={Boolean(formField.phone) && !phoneIsValid(formField.phone)}
+                      helperText={
+                        Boolean(formField.phone) && !phoneIsValid(formField.phone)
+                          ? "Số điện thoại không hợp lệ"
+                          : ""
+                      }
                       onChange={changeInput}
                     />
                   </div>
@@ -165,34 +208,61 @@ const SignUp = () => {
               </div>
               <div className="form-group position-relative">
                 <TextField
-                  id="standard-basic"
                   label="Địa chỉ email"
                   type="email"
                   name="email"
-                  variant="standard"
+                  value={formField.email}
+                  variant="outlined"
                   required
-                  className="w-100"
+                  className="w-100 authField"
+                  size="small"
+                  error={Boolean(formField.email) && !emailIsValid(formField.email)}
+                  helperText={
+                    Boolean(formField.email) && !emailIsValid(formField.email)
+                      ? "Email không hợp lệ"
+                      : ""
+                  }
                   onChange={changeInput}
                 />
               </div>
               <div className="form-group">
                 <TextField
-                  id="password"
                   label="Nhập mật khẩu"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
-                  variant="standard"
+                  value={formField.password}
+                  variant="outlined"
                   required
-                  className="w-100"
+                  className="w-100 authField"
+                  size="small"
+                  error={Boolean(formField.password) && !passwordIsStrongEnough(formField.password)}
+                  helperText={
+                    Boolean(formField.password) && !passwordIsStrongEnough(formField.password)
+                      ? "Ít nhất 8 ký tự, 1 chữ hoa và 1 số"
+                      : ""
+                  }
                   onChange={changeInput}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          edge="end"
+                          size="small"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
               <div className="form-group">
                 <TextField
-                  id="confirm_password"
                   label="Nhập lại mật khẩu"
-                  type="password"
-                  variant="standard"
+                  type={showConfirmPassword ? "text" : "password"}
+                  variant="outlined"
                   name="confirm_password"
                   required
                   helperText={
@@ -205,30 +275,45 @@ const SignUp = () => {
                     confirmPassword !== "" &&
                     formField.password !== confirmPassword
                   }
-                  className="w-100"
+                  className="w-100 authField"
+                  size="small"
                   onChange={handleConfirmPassword}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle confirm password visibility"
+                          onClick={() => setShowConfirmPassword((prev) => !prev)}
+                          edge="end"
+                          size="small"
+                        >
+                          {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
-              <div className="d-flex align-items-center mt-3 mb-3">
+              <div className="d-flex align-items-center mt-3 mb-3 authActions">
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="btn-blue col btn-lg btn-big"
+                  className="btn-blue col btn-lg btn-big authPrimaryBtn"
                 >
                   {isLoading ? "Đang xử lý..." : "Đăng ký"}
                 </Button>
                 <Button
-                  className="btn-lg btn-big col ms-2"
+                  className="btn-lg btn-big col authSecondaryBtn"
                   variant="outlined"
                   onClick={() => {
                     context.setisOpenHeaderFooterShow(true);
                     navigate("/");
                   }}
                 >
-                  Cancel
+                  Hủy
                 </Button>
               </div>
-              <p className="txt">
+              <p className="txt text-center">
                 Đã có tài khoản?
                 <span
                   className="border-effect ms-1 cursor"
@@ -237,9 +322,13 @@ const SignUp = () => {
                   Đăng nhập
                 </span>
               </p>
-              <h6 className="mt-4 text-center font-weight-bold">
-                Hoặc tiếp tục với
-              </h6>
+              <div className="d-flex align-items-center dividerWrap">
+                <div className="line" />
+                <div>
+                  <h6 className="m-1 text-center font-weight-bold">Hoặc</h6>
+                </div>
+                <div className="line" />
+              </div>
               <Button
                 className="loginWithGoogle mt-2"
                 variant="outlined"

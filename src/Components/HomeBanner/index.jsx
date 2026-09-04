@@ -50,7 +50,13 @@ const HomeBanner = () => {
                 banner.images?.map((img, i) => (
                   <SwiperSlide key={`${banner.id}-${i}`}>
                     <div className="item">
-                      <img src={img} alt={banner.name} />
+                      <img src={img} alt={banner.name || "banner"} />
+                      <div className="bannerOverlay">
+                        <span className="bannerEyebrow">Trending now</span>
+                        <h2>{banner.name || "Bộ sưu tập mới"}</h2>
+                        <p>Khám phá ưu đãi đặc biệt cho mùa mua sắm mới.</p>
+                        <button type="button">Shop now</button>
+                      </div>
                     </div>
                   </SwiperSlide>
                 )),
